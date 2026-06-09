@@ -1,4 +1,8 @@
 package Model;
 
-public class Pagamento {
+public abstract class Pagamento {
+
+    private String id;
+    /*private Aluno aluno;*/
+
 }
