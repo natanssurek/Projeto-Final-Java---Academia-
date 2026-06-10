@@ -4,11 +4,11 @@ public abstract class Pagamento {
 
     private String id;
     /*private Aluno aluno;*/
-    private float valor;
+    private double valor;
     private String data;
     private boolean status;
 
-    public Pagamento(String id, float valor, String data, boolean status) {
+    public Pagamento(String id, double valor, String data, boolean status) {
         this.id = id;
         this.valor = valor;
         this.data = data;
@@ -23,11 +23,11 @@ public abstract class Pagamento {
         this.id = id;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
@@ -39,7 +39,7 @@ public abstract class Pagamento {
         this.data = data;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -47,7 +47,7 @@ public abstract class Pagamento {
         this.status = status;
     }
 
-    public abstract void calcularTotal();
+    public abstract double calcularTotal();
 
-    public abstract void tipoPagamento();
+    public abstract String tipoPagamento();
 }
