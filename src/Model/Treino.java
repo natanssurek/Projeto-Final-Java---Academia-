@@ -1,0 +1,60 @@
+package Model;
+
+public class Treino {
+
+    private String id;
+    //private Aluno aluno;
+    //private Personal personal;
+    private String data;
+    private String tipo;
+    private String duracaoMinutos;
+    private String observacoes;
+
+    public Treino(String id, String data, String tipo, String duracaoMinutos, String observacoes) {
+        this.id = id;
+        this.data = data;
+        this.tipo = tipo;
+        this.duracaoMinutos = duracaoMinutos;
+        this.observacoes = observacoes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDuracaoMinutos() {
+        return duracaoMinutos;
+    }
+
+    public void setDuracaoMinutos(String duracaoMinutos) {
+        this.duracaoMinutos = duracaoMinutos;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+}
