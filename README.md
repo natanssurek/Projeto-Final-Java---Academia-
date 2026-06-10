@@ -139,4 +139,9 @@ Cada controller gerencia uma entidade e expõe os seguintes métodos padrão:
 
 ## 👥 Autores
 
-Desenvolvido como trabalho final da disciplina de Java.
+Desenvolvido como trabalho final da disciplina de Java por:
+
+Luiz Eduardo Morawski da Silva
+Maria Clara Paiva Costa dos Santos
+Natan Spegiorin Surek
+Victor Emanuel do Espirito Santo
