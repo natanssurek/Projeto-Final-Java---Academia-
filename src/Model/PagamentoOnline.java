@@ -31,12 +31,16 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
 
     @Override
     public void pagar(double valor, String descricao) {
+        this.setValor(valor);
+        this.setStatus(true);
+        System.out.println("Pago: " + getStatus());
+        System.out.println("Descricao: " + descricao);
 
     }
 
     @Override
     public double calcularValor() {
-        return 0;
+        return getValor() +  this.taxaOnline;
     }
 
 
