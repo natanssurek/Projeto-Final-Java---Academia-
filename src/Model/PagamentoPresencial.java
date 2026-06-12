@@ -3,7 +3,7 @@ package Model;
 public class PagamentoPresencial extends Pagamento implements Pagavel{
     private String formaPagamento;
 
-    public PagamentoPresencial(String id, float valor, String data, boolean status, String formaPagamento) {
+    public PagamentoPresencial(String id, double valor, String data, boolean status, String formaPagamento) {
         super(id, valor, data, status);
         this.formaPagamento = formaPagamento;
     }

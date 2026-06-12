@@ -4,11 +4,12 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
     private String plataforma;
     private double taxaOnline;
 
-    public PagamentoOnline(String id, float valor, String data, boolean status, String plataforma, double taxaOnline) {
+    public PagamentoOnline(String id, double valor, String data, boolean status, String plataforma, double taxaOnline) {
         super(id, valor, data, status);
         this.plataforma = plataforma;
         this.taxaOnline = taxaOnline;
     }
+
 
     @Override
     public double calcularTotal() {

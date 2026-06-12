@@ -13,7 +13,12 @@ public class InputHelper {
 
     public static int pegarNumInteiro(String texto){
         System.out.println(texto);
-        return Integer.parseInt(scan.nextLine());
+        try {
+            return Integer.parseInt(scan.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("\u001B[31mDIGITE APENAS NUMEROS!!!\u001B[0m");
+            return -1;
+        }
     }
 
     public static float pegarNumFloat(String texto){
