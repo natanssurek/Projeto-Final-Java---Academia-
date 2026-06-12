@@ -10,6 +10,21 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
         this.taxaOnline = taxaOnline;
     }
 
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(String plataforma) {
+        this.plataforma = plataforma;
+    }
+
+    public double getTaxaOnline() {
+        return taxaOnline;
+    }
+
+    public void setTaxaOnline(double taxaOnline) {
+        this.taxaOnline = taxaOnline;
+    }
 
     @Override
     public double calcularTotal() {

@@ -67,13 +67,40 @@ public class PagamentoView {
 
     public static void alterar() {
 
+        String id = InputHelper.pegarTexto("Digite o ID:");
+        double valor = InputHelper.pegarNumDouble("Digite o valor:");
+        String data = InputHelper.pegarTexto("Digite a data:");
+
+        controllerPagamento.alterar(id, valor, data);
     }
 
     public static void deletar() {
-
+        String id = InputHelper.pegarTexto("Digite o ID do pagamento que deseja deletar:");
+        controllerPagamento.deletar(id);
     }
 
     public static void listar() {
+
+        System.out.println("---> FORMAS DE LISTAMENTO DE PAGAMENTO <---");
+        System.out.println("1. Listar todos os pagamentos");
+        System.out.println("2. Listar pagamentos por ID");
+        /*System.out.println("3. Listar pagamentos por alunos");*/
+
+        int opcao = InputHelper.pegarNumInteiro("Digite a opção que deseja:");
+
+        switch(opcao) {
+            case 1 -> controllerPagamento.listarTodos();
+            case 2 -> {
+                String id = InputHelper.pegarTexto("Digite o ID:");
+                controllerPagamento.buscarPorId(id);
+            }
+
+            /*case 3 -> controllerPagamento.listarPorAluno();*/
+
+            default -> System.out.println("Digite uma opção válida!");
+        }
+
+
 
     }
 
