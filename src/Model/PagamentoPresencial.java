@@ -8,6 +8,14 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
         this.formaPagamento = formaPagamento;
     }
 
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
     @Override
     public double calcularTotal() {
         return getValor();

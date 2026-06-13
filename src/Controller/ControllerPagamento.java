@@ -22,23 +22,128 @@ public class ControllerPagamento {
 
     }
 
-    public void alterar(){
+    public void alterar(String id, double valor, String data) {
+        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+            if (listaOnline.getId().equals(id)){
+                listaOnline.setValor(valor);
+                listaOnline.setData(data);
+                System.out.println("Informações do pagamento online alteradas com sucesso!");
+                return;
+            }
+        }
 
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+            if(listaPresencial.getId().equals(id)){
+                listaPresencial.setValor(valor);
+                listaPresencial.setData(data);
+                System.out.println("Informações do pagamento presencial alteradas com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Pagamento inexistente!");
     }
 
-    public void deletar(){
+    public void deletar(String id){
+        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+            if (listaOnline.getId().equals(id)){
+                listaPagamentoOnline.remove(listaOnline);
+                System.out.println("Pagamento deletado com sucesso!");
+                return;
+            }
+        }
+
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+            if (listaPresencial.getId().equals(id)){
+                listaPagamentoPresencial.remove(listaPresencial);
+                System.out.println("Pagamento deletado com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Pagamento inexistente!");
 
     }
 
     public void listarTodos(){
 
+        System.out.println("---> PAGAMENTOS ONLINE <---");
+        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+            System.out.println("ID: " + listaOnline.getId());
+            System.out.println("Valor: " + listaOnline.getValor());
+            System.out.println("Data: " + listaOnline.getData());
+            System.out.println("Status: " + listaOnline.getStatus());
+            System.out.println("Plataforma: " + listaOnline.getPlataforma());
+            System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
+            System.out.println("----------------------------");
+        }
+
+        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+            System.out.println("ID: " + listaPresencial.getId());
+            System.out.println("Valor: " + listaPresencial.getValor());
+            System.out.println("Data: " + listaPresencial.getData());
+            System.out.println("Status: " + listaPresencial.getStatus());
+            System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
+            System.out.println("---------------------------------");
+        }
+
     }
 
-    public void buscarPorId(){
+    public void buscarPorId(String id){
+        System.out.println("---> PAGAMENTOS ONLINE <---");
+        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+            if (listaOnline.getId().equals(id)){
+                System.out.println("ID: " + listaOnline.getId());
+                System.out.println("Valor: " + listaOnline.getValor());
+                System.out.println("Data: " + listaOnline.getData());
+                System.out.println("Status: " + listaOnline.getStatus());
+                System.out.println("Plataforma: " + listaOnline.getPlataforma());
+                System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
+                System.out.println("----------------------------");
+                return;
+            }
+        }
+
+        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+            System.out.println("ID: " + listaPresencial.getId());
+            System.out.println("Valor: " + listaPresencial.getValor());
+            System.out.println("Data: " + listaPresencial.getData());
+            System.out.println("Status: " + listaPresencial.getStatus());
+            System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
+            System.out.println("---------------------------------");
+            return;
+        }
+
+        System.out.println("Pagamento inexistente!");
 
     }
 
-    public void listarPorAluno(){
+    /*public void listarPorAluno(){
+        System.out.println("---> PAGAMENTOS ONLINE <---");
+        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+            if (listaOnline.getAluno.equals(aluno)){
+                System.out.println("ID: " + listaOnline.getId());
+                System.out.println("Valor: " + listaOnline.getValor());
+                System.out.println("Data: " + listaOnline.getData());
+                System.out.println("Status: " + listaOnline.getStatus());
+                System.out.println("Plataforma: " + listaOnline.getPlataforma());
+                System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
+                System.out.println("----------------------------");
+            }
+        }
 
-    }
+        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+            if (listaPresencial.getAluno.equals(aluno)) {
+                System.out.println("ID: " + listaPresencial.getId());
+                System.out.println("Valor: " + listaPresencial.getValor());
+                System.out.println("Data: " + listaPresencial.getData());
+                System.out.println("Status: " + listaPresencial.getStatus());
+                System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
+                System.out.println("---------------------------------");
+            }
+        }
+
+        System.out.println("Pagamento inexistente!");
+    }*/
 }
