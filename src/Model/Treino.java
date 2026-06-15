@@ -3,15 +3,17 @@ package Model;
 public class Treino {
 
     private String id;
-    //private Aluno aluno;
-    //private Personal personal;
+    private Aluno aluno;
+    private PersonalTrainer personal;
     private String data;
     private String tipo;
     private String duracaoMinutos;
     private String observacoes;
 
-    public Treino(String id, String data, String tipo, String duracaoMinutos, String observacoes) {
+    public Treino(String id,Aluno aluno, PersonalTrainer personal, String data, String tipo, String duracaoMinutos, String observacoes) {
         this.id = id;
+        this.aluno = aluno;
+        this.personal = personal;
         this.data = data;
         this.tipo = tipo;
         this.duracaoMinutos = duracaoMinutos;
@@ -24,6 +26,22 @@ public class Treino {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public PersonalTrainer getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(PersonalTrainer personal) {
+        this.personal = personal;
     }
 
     public String getData() {
