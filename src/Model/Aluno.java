@@ -39,7 +39,6 @@ public class Aluno extends Pessoa {
 
     @Override
     public String exibirInfo() {
-
         return "\n=== ALUNO ===" +
                 "\nID: " + getId() +
                 "\nNome: " + getNome() +
@@ -47,7 +46,9 @@ public class Aluno extends Pessoa {
                 "\nEmail: " + getEmail() +
                 "\nTelefone: " + getTelefone() +
                 "\nMatrícula: " + matricula +
-                "\nObjetivo: " + objetivo;
+                "\nObjetivo: " + objetivo +
+                "\nPlano: " + plano.getDescricao() +
+                "\nValor do Plano: R$ " + plano.getValor();
     }
 
 }

@@ -8,16 +8,7 @@ public class InputHelper {
 
     public static String pegarTexto(String texto) {
         System.out.println(texto);
-        String entrada = scan.nextLine();
-        if (entrada.isBlank()) {
-            System.out.println("\u001B[31mENTRADA NÃO PODE SER VAZIA!!!\u001B[0m");
-            return "";
-        }
-        if (entrada.matches(".*\\d.*")) {
-            System.out.println("\u001B[31mNÃO INSIRA NÚMEROS!!!\u001B[0m");
-            return "";
-        }
-        return entrada;
+        return scan.nextLine();
     }
 
     public static int pegarNumInteiro(String texto){

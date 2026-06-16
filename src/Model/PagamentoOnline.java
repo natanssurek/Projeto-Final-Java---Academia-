@@ -5,7 +5,7 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
     private static final double TAXA_ONLINE = 0.05;
     private double taxaOnline;
 
-    public PagamentoOnline(Aluno aluno, double valor, String data, boolean status, String plataforma, double taxaOnline) {
+    public PagamentoOnline(Aluno aluno, double valor, String data, boolean status, String plataforma) {
         super(aluno, valor, data, status);
         this.plataforma = plataforma;
         this.taxaOnline = TAXA_ONLINE;

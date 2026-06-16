@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Aluno;
+import Model.Pagamento;
 import Model.PagamentoOnline;
 import Model.PagamentoPresencial;
 
@@ -9,12 +10,12 @@ import java.util.List;
 
 public class ControllerPagamento {
 
-    List <PagamentoOnline> listaPagamentoOnline = new ArrayList<>();
-    List <PagamentoPresencial> listaPagamentoPresencial = new ArrayList<>();
+    List<PagamentoOnline> listaPagamentoOnline = new ArrayList<>();
+    List<PagamentoPresencial> listaPagamentoPresencial = new ArrayList<>();
 
-    public void cadastrarPagamentoOnline(Aluno aluno, String data, boolean status, String plataforma, double taxaOnline) {
+    public void cadastrarPagamentoOnline(Aluno aluno, String data, String plataforma) {
         double valor = aluno.getPlano().getValor();
-        PagamentoOnline pagamentoOnline = new PagamentoOnline(aluno, valor, data, status, plataforma, taxaOnline);
+        PagamentoOnline pagamentoOnline = new PagamentoOnline(aluno, valor, data, false, plataforma);
         listaPagamentoOnline.add(pagamentoOnline);
     }
 
@@ -24,135 +25,55 @@ public class ControllerPagamento {
         listaPagamentoPresencial.add(pagamentoPresencial);
     }
 
-    public void alterar(String id, String data, boolean status) {
-        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
-            if (listaOnline.getId().equals(id)) {
-                listaOnline.setData(data);
-                listaOnline.setStatus(status);
-                System.out.println("Pagamento online alterado com sucesso!");
-                return;
+    public boolean alterar(String id, String data, boolean status) {
+        for (PagamentoOnline p : listaPagamentoOnline) {
+            if (p.getId().equals(id)) {
+                p.setData(data);
+                p.setStatus(status);
+                return true;
             }
         }
-
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
-            if (listaPresencial.getId().equals(id)) {
-                listaPresencial.setData(data);
-                listaPresencial.setStatus(status);
-                System.out.println("Pagamento presencial alterado com sucesso!");
-                return;
+        for (PagamentoPresencial p : listaPagamentoPresencial) {
+            if (p.getId().equals(id)) {
+                p.setData(data);
+                p.setStatus(status);
+                return true;
             }
         }
-        System.out.println("Pagamento inexistente!");
+        return false;
     }
 
-    public void deletar(String id) {
-        boolean removido = listaPagamentoOnline.removeIf(p -> p.getId().equals(id));
-        if (removido) {
-            System.out.println("Pagamento online deletado com sucesso!");
-            return;
-        }
-
-        removido = listaPagamentoPresencial.removeIf(p -> p.getId().equals(id));
-        if (removido) {
-            System.out.println("Pagamento presencial deletado com sucesso!");
-            return;
-        }
-
-        System.out.println("Pagamento inexistente!");
+    public boolean deletar(String id) {
+        return listaPagamentoOnline.removeIf(p -> p.getId().equals(id)) ||
+                listaPagamentoPresencial.removeIf(p -> p.getId().equals(id));
     }
 
-    public void listarTodos(){
-        System.out.println("---> PAGAMENTOS ONLINE <---");
-        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
-            System.out.println("ID: " + listaOnline.getId());
-            System.out.println("Aluno: " + listaOnline.getAluno().getNome());
-            System.out.println("Valor: " + listaOnline.getValor());
-            System.out.println("Data: " + listaOnline.getData());
-            System.out.println("Status: " + listaOnline.getStatus());
-            System.out.println("Plataforma: " + listaOnline.getPlataforma());
-            System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
-            System.out.println("----------------------------");
-        }
-
-        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
-            System.out.println("ID: " + listaPresencial.getId());
-            System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
-            System.out.println("Valor: " + listaPresencial.getValor());
-            System.out.println("Data: " + listaPresencial.getData());
-            System.out.println("Status: " + listaPresencial.getStatus());
-            System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
-            System.out.println("---------------------------------");
-        }
+    public List<PagamentoOnline> getListaPagamentoOnline() {
+        return listaPagamentoOnline;
     }
 
-    public void buscarPorId(String id){
-        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
-            if (listaOnline.getId().equals(id)){
-                System.out.println("ID: " + listaOnline.getId());
-                System.out.println("Aluno: " + listaOnline.getAluno().getNome());
-                System.out.println("Valor: " + listaOnline.getValor());
-                System.out.println("Data: " + listaOnline.getData());
-                System.out.println("Status: " + listaOnline.getStatus());
-                System.out.println("Plataforma: " + listaOnline.getPlataforma());
-                System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
-                return;
-            }
-        }
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
-            if (listaPresencial.getId().equals(id)){
-                System.out.println("ID: " + listaPresencial.getId());
-                System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
-                System.out.println("Valor: " + listaPresencial.getValor());
-                System.out.println("Data: " + listaPresencial.getData());
-                System.out.println("Status: " + listaPresencial.getStatus());
-                System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
-                return;
-            }
-        }
-        System.out.println("Pagamento inexistente!");
+    public List<PagamentoPresencial> getListaPagamentoPresencial() {
+        return listaPagamentoPresencial;
     }
 
-    public void listarPorAluno(String nomeAluno){
-        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
-            if (listaOnline.getAluno().getNome().equals(nomeAluno)){
-                System.out.println("ID: " + listaOnline.getId());
-                System.out.println("Aluno: " + listaOnline.getAluno().getNome());
-                System.out.println("Valor: " + listaOnline.getValor());
-                System.out.println("Data: " + listaOnline.getData());
-                System.out.println("Status: " + listaOnline.getStatus());
-                System.out.println("Plataforma: " + listaOnline.getPlataforma());
-                System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
-                System.out.println("----------------------------");
-            }
+    public Pagamento buscarPorId(String id) {
+        for (PagamentoOnline p : listaPagamentoOnline) {
+            if (p.getId().equals(id)) return p;
         }
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
-            if (listaPresencial.getAluno().getNome().equals(nomeAluno)){
-                System.out.println("ID: " + listaPresencial.getId());
-                System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
-                System.out.println("Valor: " + listaPresencial.getValor());
-                System.out.println("Data: " + listaPresencial.getData());
-                System.out.println("Status: " + listaPresencial.getStatus());
-                System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
-                System.out.println("---------------------------------");
-            }
+        for (PagamentoPresencial p : listaPagamentoPresencial) {
+            if (p.getId().equals(id)) return p;
         }
+        return null;
     }
 
-    public void exibirPorId(String id) {
-        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
-            if (listaOnline.getId().equals(id)) {
-                System.out.println(listaOnline.exibirInfo());
-                return;
-            }
+    public List<Pagamento> listarPorAluno(String nomeAluno) {
+        List<Pagamento> resultado = new ArrayList<>();
+        for (PagamentoOnline p : listaPagamentoOnline) {
+            if (p.getAluno().getNome().equals(nomeAluno)) resultado.add(p);
         }
-
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
-            if (listaPresencial.getId().equals(id)) {
-                System.out.println(listaPresencial.exibirInfo());
-                return;
-            }
+        for (PagamentoPresencial p : listaPagamentoPresencial) {
+            if (p.getAluno().getNome().equals(nomeAluno)) resultado.add(p);
         }
-        System.out.println("Pagamento inexistente!");
+        return resultado;
     }
 }
