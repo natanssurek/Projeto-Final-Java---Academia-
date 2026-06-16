@@ -10,7 +10,7 @@ public abstract class Pagamento {
 
 
     public Pagamento(Aluno aluno, double valor, String data, boolean status) {
-        this.id = "PAG" + contador++;
+        this.id = "ID PAGAMENTO-" + contador++;
         this.aluno = aluno;
         this.valor = valor;
         this.data = data;
@@ -60,4 +60,6 @@ public abstract class Pagamento {
     public abstract double calcularTotal();
 
     public abstract String tipoPagamento();
+
+    public abstract String exibirInfo();
 }

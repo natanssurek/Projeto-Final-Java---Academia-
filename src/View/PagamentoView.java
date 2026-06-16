@@ -43,42 +43,48 @@ public class PagamentoView {
     }
 
     public static void cadastrarPresencial() {
-        String nomeAluno = InputHelper.pegarTexto("Digite o nome do aluno:");
-        double valor = InputHelper.pegarNumDouble("Digite o valor:");
-        String data = InputHelper.pegarTexto("Digite a data:");
-        String formaPagamento = InputHelper.pegarTexto("Digite a forma de pagamento:");
-
         int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
         Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
 
-        controllerPagamento.cadastrarPagamentoPresencial(nomeAluno, valor, aluno, data, false, formaPagamento);
+        String data = InputHelper.pegarTexto("Digite a data:");
+        String formaPagamento = InputHelper.pegarTexto("Digite a forma de pagamento:");
+
+        controllerPagamento.cadastrarPagamentoPresencial(aluno, data, formaPagamento);
         System.out.println("Cadastro de pagamento presencial realizado com sucesso!");
     }
 
     public static void cadastrarOnline() {
-        String nomeAluno = InputHelper.pegarTexto("Digite o nome do aluno:");
-        double valor = InputHelper.pegarNumDouble("Digite o valor:");
+        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
+        Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
+
         String data = InputHelper.pegarTexto("Digite a data:");
         String plataforma = InputHelper.pegarTexto("Digite a plataforma:");
         double taxaOnline = InputHelper.pegarNumDouble("Digite a taxa online:");
 
-        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
-        Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
-
-        controllerPagamento.cadastrarPagamentoOnline(nomeAluno, valor, aluno, data, false, plataforma, taxaOnline);
+        controllerPagamento.cadastrarPagamentoOnline(aluno, data, false, plataforma, taxaOnline);
         System.out.println("Cadastro de pagamento online realizado com sucesso!");
     }
 
     public static void alterar() {
-        String id = InputHelper.pegarTexto("Digite o ID do pagamento:");
-        double valor = InputHelper.pegarNumDouble("Digite o novo valor:");
+        String id = InputHelper.pegarTexto("Digite o ID do pagamento que deseja alterar:");
+        controllerPagamento.exibirPorId(id);
+
         String data = InputHelper.pegarTexto("Digite a nova data:");
-        controllerPagamento.alterar(id, valor, data);
+        boolean status = InputHelper.pegarNumInteiro("Pagamento confirmado? (1-Sim / 0-Não):") == 1;
+
+        controllerPagamento.alterar(id, data, status);
     }
 
     public static void deletar() {
         String id = InputHelper.pegarTexto("Digite o ID do pagamento que deseja deletar:");
-        controllerPagamento.deletar(id);
+        controllerPagamento.exibirPorId(id);
+
+        int confirmacao = InputHelper.pegarNumInteiro("Confirmar exclusão? (1-Sim / 0-Não):");
+        if (confirmacao == 1) {
+            controllerPagamento.deletar(id);
+        } else {
+            System.out.println("Exclusão cancelada!");
+        }
     }
 
     public static void listar() {
