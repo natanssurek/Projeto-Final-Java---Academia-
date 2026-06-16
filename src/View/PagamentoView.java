@@ -3,7 +3,7 @@ package View;
 import Controller.AlunoController;
 import Controller.ControllerPagamento;
 import Model.Aluno;
-import Model.InputHelper;
+import util.InputHelper;
 
 public class PagamentoView {
 
