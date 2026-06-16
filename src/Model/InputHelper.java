@@ -25,5 +25,5 @@ public class InputHelper {
         System.out.println(texto);
         return Float.parseFloat(scan.nextLine());
     }
-    
+
 }

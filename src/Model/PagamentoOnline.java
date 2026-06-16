@@ -4,8 +4,8 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
     private String plataforma;
     private double taxaOnline;
 
-    public PagamentoOnline(String id, double valor, String data, boolean status, String plataforma, double taxaOnline) {
-        super(id, valor, data, status);
+    public PagamentoOnline(Aluno aluno, double valor, String data, boolean status, String plataforma, double taxaOnline) {
+        super(aluno, valor, data, status);
         this.plataforma = plataforma;
         this.taxaOnline = taxaOnline;
     }

@@ -18,6 +18,9 @@ public class Matricula {
         this.ativo = ativo;
     }
 
+    public Matricula(String id, String aluno, String plano, String dataInicio, String dataFinal, boolean ativo) {
+    }
+
     public String getId() {
         return id;
     }

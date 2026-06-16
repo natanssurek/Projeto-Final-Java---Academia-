@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Aluno;
 import Model.PagamentoOnline;
 import Model.PagamentoPresencial;
 
@@ -11,13 +12,13 @@ public class ControllerPagamento {
     List <PagamentoOnline> listaPagamentoOnline = new ArrayList<>();
     List <PagamentoPresencial> listaPagamentoPresencial = new ArrayList<>();
 
-    public void cadastrarPagamentoOnline(String id, double valor, String data, boolean status, String plataforma, double taxaOnline) {
-        PagamentoOnline pagamentoOnline = new PagamentoOnline(id, valor, data, status, plataforma, taxaOnline);
+    public void cadastrarPagamentoOnline(String nomeAluno, double valor, Aluno aluno, String data, boolean status, String plataforma, double taxaOnline) {
+        PagamentoOnline pagamentoOnline = new PagamentoOnline(aluno, valor,  data, status, plataforma, taxaOnline);
         listaPagamentoOnline.add(pagamentoOnline);
     }
 
-    public void cadastrarPagamentoPresencial(String id, double valor, String data, boolean status, String formaPagamento) {
-        PagamentoPresencial pagamentoPresencial = new PagamentoPresencial(id, valor, data, status, formaPagamento);
+    public void cadastrarPagamentoPresencial(String nomeAluno, double valor, Aluno aluno, String data, boolean status, String formaPagamento) {
+        PagamentoPresencial pagamentoPresencial = new PagamentoPresencial(aluno, valor, data, status, formaPagamento);
         listaPagamentoPresencial.add(pagamentoPresencial);
 
     }
@@ -64,10 +65,10 @@ public class ControllerPagamento {
     }
 
     public void listarTodos(){
-
         System.out.println("---> PAGAMENTOS ONLINE <---");
-        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
             System.out.println("ID: " + listaOnline.getId());
+            System.out.println("Aluno: " + listaOnline.getAluno().getNome());
             System.out.println("Valor: " + listaOnline.getValor());
             System.out.println("Data: " + listaOnline.getData());
             System.out.println("Status: " + listaOnline.getStatus());
@@ -77,52 +78,49 @@ public class ControllerPagamento {
         }
 
         System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
             System.out.println("ID: " + listaPresencial.getId());
+            System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
             System.out.println("Valor: " + listaPresencial.getValor());
             System.out.println("Data: " + listaPresencial.getData());
             System.out.println("Status: " + listaPresencial.getStatus());
             System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
             System.out.println("---------------------------------");
         }
-
     }
 
     public void buscarPorId(String id){
-        System.out.println("---> PAGAMENTOS ONLINE <---");
-        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
+        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
             if (listaOnline.getId().equals(id)){
                 System.out.println("ID: " + listaOnline.getId());
+                System.out.println("Aluno: " + listaOnline.getAluno().getNome());
                 System.out.println("Valor: " + listaOnline.getValor());
                 System.out.println("Data: " + listaOnline.getData());
                 System.out.println("Status: " + listaOnline.getStatus());
                 System.out.println("Plataforma: " + listaOnline.getPlataforma());
                 System.out.println("TaxaOnline: " + listaOnline.getTaxaOnline());
-                System.out.println("----------------------------");
                 return;
             }
         }
-
-        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
-            System.out.println("ID: " + listaPresencial.getId());
-            System.out.println("Valor: " + listaPresencial.getValor());
-            System.out.println("Data: " + listaPresencial.getData());
-            System.out.println("Status: " + listaPresencial.getStatus());
-            System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
-            System.out.println("---------------------------------");
-            return;
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
+            if (listaPresencial.getId().equals(id)){
+                System.out.println("ID: " + listaPresencial.getId());
+                System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
+                System.out.println("Valor: " + listaPresencial.getValor());
+                System.out.println("Data: " + listaPresencial.getData());
+                System.out.println("Status: " + listaPresencial.getStatus());
+                System.out.println("FormaPagamento: " + listaPresencial.getFormaPagamento());
+                return;
+            }
         }
-
         System.out.println("Pagamento inexistente!");
-
     }
 
-    /*public void listarPorAluno(){
-        System.out.println("---> PAGAMENTOS ONLINE <---");
-        for (PagamentoOnline listaOnline : listaPagamentoOnline ) {
-            if (listaOnline.getAluno.equals(aluno)){
+    public void listarPorAluno(String nomeAluno){
+        for (PagamentoOnline listaOnline : listaPagamentoOnline) {
+            if (listaOnline.getAluno().getNome().equals(nomeAluno)){
                 System.out.println("ID: " + listaOnline.getId());
+                System.out.println("Aluno: " + listaOnline.getAluno().getNome());
                 System.out.println("Valor: " + listaOnline.getValor());
                 System.out.println("Data: " + listaOnline.getData());
                 System.out.println("Status: " + listaOnline.getStatus());
@@ -131,11 +129,10 @@ public class ControllerPagamento {
                 System.out.println("----------------------------");
             }
         }
-
-        System.out.println("---> PAGAMENTOS PRESENCIAIS <---");
-        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial ) {
-            if (listaPresencial.getAluno.equals(aluno)) {
+        for (PagamentoPresencial listaPresencial : listaPagamentoPresencial) {
+            if (listaPresencial.getAluno().getNome().equals(nomeAluno)){
                 System.out.println("ID: " + listaPresencial.getId());
+                System.out.println("Aluno: " + listaPresencial.getAluno().getNome());
                 System.out.println("Valor: " + listaPresencial.getValor());
                 System.out.println("Data: " + listaPresencial.getData());
                 System.out.println("Status: " + listaPresencial.getStatus());
@@ -143,7 +140,5 @@ public class ControllerPagamento {
                 System.out.println("---------------------------------");
             }
         }
-
-        System.out.println("Pagamento inexistente!");
-    }*/
+    }
 }
