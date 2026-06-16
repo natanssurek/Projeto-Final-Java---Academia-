@@ -47,17 +47,6 @@ public class PagamentoView {
         return InputHelper.pegarNumInteiro("Digite o número da ação escolhida:");
     }
 
-    public static void cadastrarPresencial() {
-        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
-        Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
-
-        String data = InputHelper.pegarTexto("Digite a data:");
-        String formaPagamento = InputHelper.pegarTexto("Digite a forma de pagamento:");
-
-        controllerPagamento.cadastrarPagamentoPresencial(aluno, data, formaPagamento);
-        System.out.println("Cadastro de pagamento presencial realizado com sucesso!");
-    }
-
     public static void cadastrarOnline() {
         int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
         Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
@@ -67,6 +56,17 @@ public class PagamentoView {
 
         controllerPagamento.cadastrarPagamentoOnline(aluno, data, plataforma);
         System.out.println("Cadastro de pagamento online realizado com sucesso!");
+    }
+
+    public static void cadastrarPresencial() {
+        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
+        Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
+
+        String data = InputHelper.pegarTexto("Digite a data:");
+        String formaPagamento = InputHelper.pegarTexto("Digite a forma de pagamento:");
+
+        controllerPagamento.cadastrarPagamentoPresencial(aluno, data, formaPagamento);
+        System.out.println("Cadastro de pagamento presencial realizado com sucesso!");
     }
 
     public static void alterar() {

@@ -18,7 +18,7 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
 
     @Override
     public double calcularTotal() {
-        return getValor();
+        return calcularValor();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
 
     @Override
     public double calcularTotal() {
-        return getValor() + this.taxaOnline;
+        return calcularValor();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
 
     @Override
     public double calcularValor() {
-        return getValor() +  this.taxaOnline;
+        return getValor() + (getValor() * this.taxaOnline);
     }
 
     @Override
