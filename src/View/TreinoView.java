@@ -31,7 +31,7 @@ public class TreinoView {
                     cadastrar();
                     break;
                 case 2 :
-                    alterarObjetivo();
+                    alterarTreinos();
                     break;
                 case 3 :
                     deletar();
@@ -94,7 +94,7 @@ public class TreinoView {
         }
     }
 
-    private static void alterarObjetivo() {
+    private static void alterarTreinos() {
         System.out.println("--- ALTERAR OBJETIVOS DO TREINO ---");
         int id = InputHelper.pegarNumInteiro("Digite o ID do Treino que deseja mudar: ");
         Treino treinoExistente = treinoController.buscarPorId(id);
