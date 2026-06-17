@@ -18,7 +18,7 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
 
     @Override
     public double calcularTotal() {
-        return getValor();
+        return calcularValor();
     }
 
     @Override
@@ -43,5 +43,16 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
     @Override
     public double calcularValor() {
         return getValor();
+    }
+
+    @Override
+    public String exibirInfo() {
+        return "\n=== PAGAMENTO PRESENCIAL ===" +
+                "\nID: " + getId() +
+                "\nAluno: " + getAluno().getNome() +
+                "\nValor: " + getValor() +
+                "\nData: " + getData() +
+                "\nStatus: " + (getStatus() ? "Pago" : "Pendente") +
+                "\nForma de Pagamento: " + formaPagamento;
     }
 }

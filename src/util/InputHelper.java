@@ -6,7 +6,7 @@ public class InputHelper {
 
     public static Scanner scan = new Scanner(System.in);
 
-    public static String pegarTexto(String texto){
+    public static String pegarTexto(String texto) {
         System.out.println(texto);
         return scan.nextLine();
     }
@@ -23,11 +23,21 @@ public class InputHelper {
 
     public static float pegarNumFloat(String texto){
         System.out.println(texto);
-        return Float.parseFloat(scan.nextLine());
+        try {
+            return Float.parseFloat(scan.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("\u001B[31mDIGITE APENAS NUMEROS!!!\u001B[0m");
+            return -1;
+        }
     }
 
     public static double pegarNumDouble(String texto){
         System.out.println(texto);
-        return Double.parseDouble(scan.nextLine());
+        try {
+            return Double.parseDouble(scan.nextLine());
+        }  catch (NumberFormatException e) {
+            System.out.println("\u001B[31mDIGITE APENAS NUMEROS!!!\u001B[0m");
+            return -1;
+        }
     }
 }

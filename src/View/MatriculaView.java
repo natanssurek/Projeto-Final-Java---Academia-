@@ -9,6 +9,8 @@ import util.InputHelper;
 import java.util.List;
 
 import static util.InputHelper.scan;
+import Model.Plano;
+import View.PlanoView;
 
 public class MatriculaView {
 
@@ -90,16 +92,15 @@ public class MatriculaView {
         if (matriculaEncontrada != null) {
             System.out.println("Matrícula encontrada para o aluno: " + matriculaEncontrada.getAluno().getNome());
 
-            System.out.print("Novo Nome do Plano: ");
-            String novoPlano = scan.nextLine();
-            matriculaEncontrada.getPlano().setAluno(novoPlano);
+            PlanoView.listar();
+            int opcaoPlano = InputHelper.pegarNumInteiro("Escolha o novo plano:");
+            Plano novoPlano = PlanoView.selecionarPlano(opcaoPlano);
+            matriculaEncontrada.setPlano(novoPlano);
 
-            System.out.print("Nova Data de Início: ");
-            String novaDataInicio = scan.nextLine();
+            String novaDataInicio = InputHelper.pegarTexto("Nova Data de Início:");
             matriculaEncontrada.setDataInicio(novaDataInicio);
 
-            System.out.print("Nova Data Final: ");
-            String novaDataFinal = scan.nextLine();
+            String novaDataFinal = InputHelper.pegarTexto("Nova Data Final:");
             matriculaEncontrada.setDataFinal(novaDataFinal);
 
             System.out.println("Dados alterados com sucesso!");
