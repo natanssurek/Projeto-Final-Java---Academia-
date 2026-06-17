@@ -15,9 +15,9 @@ public class PersonalController {
         return listaPersonais;
     }
 
-    public PersonalTrainer buscarPorIdPersonal(int id) {
+    public PersonalTrainer buscarPorIdPersonal(String id) { // <- String
         for (PersonalTrainer personal : listaPersonais) {
-            if (personal.getId() == id) {
+            if (personal.getIdPersonal().equals(id)) { // <- getIdPersonal() e equals()
                 return personal;
             }
         }
@@ -26,8 +26,8 @@ public class PersonalController {
 
     /// PRETENDO FAZER MAIS MÉTODOS DE BUSCAR COMO: BUSCAR POR CPF, CREF, NOME
 
-    public boolean alterarPersonal(PersonalTrainer personalAtualizado) {
-        PersonalTrainer personalEncontrado = buscarPorIdPersonal(personalAtualizado.getId());
+    public boolean alterarPersonal(String id, PersonalTrainer personalAtualizado) { // <- String id separado
+        PersonalTrainer personalEncontrado = buscarPorIdPersonal(id);
 
         if (personalEncontrado != null) {
             listaPersonais.remove(personalEncontrado);
@@ -37,14 +37,13 @@ public class PersonalController {
         return false;
     }
 
-    public boolean deletarPersonal(int id) {
+    public boolean deletarPersonal(String id) { // <- String
         PersonalTrainer personalEncontrado = buscarPorIdPersonal(id);
 
         if (personalEncontrado != null) {
             listaPersonais.remove(personalEncontrado);
             return true;
         }
-
         return false;
     }
 }
