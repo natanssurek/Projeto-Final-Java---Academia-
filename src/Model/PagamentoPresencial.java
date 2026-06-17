@@ -3,8 +3,8 @@ package Model;
 public class PagamentoPresencial extends Pagamento implements Pagavel{
     private String formaPagamento;
 
-    public PagamentoPresencial(String id, double valor, String data, boolean status, String formaPagamento) {
-        super(id, valor, data, status);
+    public PagamentoPresencial(Aluno aluno, double valor, String data, boolean status, String formaPagamento) {
+        super(aluno, valor, data, status);
         this.formaPagamento = formaPagamento;
     }
 
@@ -18,7 +18,7 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
 
     @Override
     public double calcularTotal() {
-        return getValor();
+        return calcularValor();
     }
 
     @Override
@@ -43,5 +43,16 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
     @Override
     public double calcularValor() {
         return getValor();
+    }
+
+    @Override
+    public String exibirInfo() {
+        return "\n=== PAGAMENTO PRESENCIAL ===" +
+                "\nID: " + getId() +
+                "\nAluno: " + getAluno().getNome() +
+                "\nValor: " + getValor() +
+                "\nData: " + getData() +
+                "\nStatus: " + (getStatus() ? "Pago" : "Pendente") +
+                "\nForma de Pagamento: " + formaPagamento;
     }
 }

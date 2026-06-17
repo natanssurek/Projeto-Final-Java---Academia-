@@ -1,4 +1,3 @@
-import Model.InputHelper;
 import View.PagamentoView;
 
 public class Main {

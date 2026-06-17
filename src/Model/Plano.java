@@ -1,11 +1,20 @@
 package Model;
 
 public class Plano implements Calculavel {
-    private String id;
-    private String aluno;
+
+    public static final Plano MENSAL = new Plano("MENSAL", 100.00, 1);
+    public static final Plano SEMESTRAL = new Plano("SEMESTRAL", 500.00, 6);
+    public static final Plano ANUAL = new Plano("ANUAL", 900.00, 12);
+
+    private String descricao;
     private double valor;
     private int duracaoMeses;
-    private String descricao;
+
+    private Plano(String descricao, double valor, int duracaoMeses) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.duracaoMeses = duracaoMeses;
+    }
 
     @Override
     public double calcularMensalidade() {
@@ -14,48 +23,13 @@ public class Plano implements Calculavel {
         }
         return this.valor / this.duracaoMeses;
     }
+
     @Override
     public double calcularDesconto(double desconto) {
         return this.valor - (this.valor * desconto / 100);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAluno() {
-        return aluno;
-    }
-
-    public int getDuracaoMeses() {
-        return duracaoMeses;
-    }
-
-    public void setDuracaoMeses(int duracaoMeses) {
-        this.duracaoMeses = duracaoMeses;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setAluno(String aluno) {
-        this.aluno = aluno;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+    public String getDescricao() { return descricao; }
+    public double getValor() { return valor; }
+    public int getDuracaoMeses() { return duracaoMeses; }
 }

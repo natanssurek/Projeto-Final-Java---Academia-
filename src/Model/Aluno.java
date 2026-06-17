@@ -4,12 +4,21 @@ public class Aluno extends Pessoa {
 
     private String matricula;
     private String objetivo;
+    private Plano plano;
 
-    public Aluno(int id, String nome,String cpf, String email, String telefone, String matricula, String objetivo) {
+    public Aluno(int id, String nome, String cpf, String email, String telefone, String matricula, String objetivo, Plano plano) {
         super(id, nome, cpf, email, telefone);
-
         this.matricula = matricula;
         this.objetivo = objetivo;
+        this.plano = plano;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 
     public String getMatricula() {
@@ -30,7 +39,6 @@ public class Aluno extends Pessoa {
 
     @Override
     public String exibirInfo() {
-
         return "\n=== ALUNO ===" +
                 "\nID: " + getId() +
                 "\nNome: " + getNome() +
@@ -38,7 +46,9 @@ public class Aluno extends Pessoa {
                 "\nEmail: " + getEmail() +
                 "\nTelefone: " + getTelefone() +
                 "\nMatrícula: " + matricula +
-                "\nObjetivo: " + objetivo;
+                "\nObjetivo: " + objetivo +
+                "\nPlano: " + plano.getDescricao() +
+                "\nValor do Plano: R$ " + plano.getValor();
     }
 
 }

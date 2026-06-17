@@ -18,56 +18,22 @@ public class Matricula {
         this.ativo = ativo;
     }
 
-    public int getId(){
-            return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Aluno getAluno() { return aluno; }
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
-    public Aluno getAluno() {
-        return aluno;
-    }
+    public Plano getPlano() { return plano; }
+    public void setPlano(Plano plano) { this.plano = plano; }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
+    public String getDataInicio() { return dataInicio; }
+    public void setDataInicio(String dataInicio) { this.dataInicio = dataInicio; }
 
-    public Plano getPlano() {
-        return plano;
+    public String getDataFinal() { return dataFinal; }
+    public void setDataFinal(String dataFinal) { this.dataFinal = dataFinal; }
 
-    }
-
-    public void setPlano(Plano plano) {
-        this.plano = plano;
-    }
-
-    public String getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public String getDataFinal() {
-        return dataFinal;
-    }
-
-    public void setDataFinal(String dataFinal) {
-        this.dataFinal = dataFinal;
-    }
-
-    public void ativar() {
-        this.ativo = true;
-    }
-
-    public void desativar(){
-        this.ativo = false;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
+    public void ativar() { this.ativo = true; }
+    public void desativar() { this.ativo = false; }
+    public boolean isAtivo() { return ativo; }
 }

@@ -44,8 +44,9 @@ public class MatriculaView {
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcao != 0);
+        } while (opcao != 5);
     }
+
     private static void cadastrar() {
         System.out.println("\n--- NOVA MATRÍCULA ---");
         int idMatricula = InputHelper.pegarNumInteiro("ID da Matrícula: ");
@@ -75,7 +76,6 @@ public class MatriculaView {
             planoEscolhido.setDescricao("Plano Anual Fit");
 
             if (descOpcao == 1) {
-                // Utiliza o método calcularDesconto que você criou no Model!
                 double valorComDesconto = planoEscolhido.calcularDesconto(10); // 10% de desconto
                 planoEscolhido.setValor(valorComDesconto);
             } else {
@@ -108,7 +108,7 @@ public class MatriculaView {
             System.out.println("Alterando matrícula de: " + mat.getAluno().getNome());
             System.out.println("Plano Atual: " + mat.getPlano().getDescricao());
 
-            System.out.println("\nEscolha o Novo Plano:\n1. Mensal\n2. Anual");
+            System.out.println("Escolha o Novo Plano:1. Mensal2. Anual");
             int opcaoPlano = InputHelper.pegarNumInteiro("Opção: ");
 
             Plano novoPlano = new Plano();
@@ -135,6 +135,7 @@ public class MatriculaView {
             System.out.println("Matrícula não encontrada.");
         }
     }
+
     private static void deletar() {
         int id = InputHelper.pegarNumInteiro("ID da Matrícula para remover: ");
         if (matriculaController.removerMatricula(id)) {
@@ -143,8 +144,9 @@ public class MatriculaView {
             System.out.println("Não encontrada.");
         }
     }
+
     private static void listar() {
-        System.out.println("--- ALUNOS MATRICULADOS ---");
+        System.out.println("\n--- ALUNOS MATRICULADOS ---");
         if (matriculaController.listarMatriculados().isEmpty()) {
             System.out.println("Nenhuma matrícula ativa.");
             return;
