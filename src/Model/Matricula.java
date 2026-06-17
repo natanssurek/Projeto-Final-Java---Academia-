@@ -2,27 +2,27 @@ package Model;
 
 public class Matricula {
 
-    private String id;
+    private int id;
     private Aluno aluno;
     private Plano plano;
     private String dataInicio;
     private String dataFinal;
     private boolean ativo;
 
-    public Matricula(String id, Aluno aluno, Plano plano, String dataInicio, String dataFinal, boolean ativo) {
+    public Matricula(int id, Aluno aluno, Plano plano, String dataInicio, String dataFinal, boolean ativo) {
         this.id = id;
         this.aluno = aluno;
-        //this.plano = plano;
+        this.plano = plano;
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
         this.ativo = ativo;
     }
 
-    public String getId() {
-        return id;
+    public int getId(){
+            return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -34,8 +34,9 @@ public class Matricula {
         this.aluno = aluno;
     }
 
-   public Plano getPlano() {
+    public Plano getPlano() {
         return plano;
+
     }
 
     public void setPlano(Plano plano) {
@@ -62,7 +63,7 @@ public class Matricula {
         this.ativo = true;
     }
 
-    public void desativar() {
+    public void desativar(){
         this.ativo = false;
     }
 
