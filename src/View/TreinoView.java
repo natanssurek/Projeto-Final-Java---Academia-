@@ -27,18 +27,31 @@ public class TreinoView {
             opcao = InputHelper.pegarNumInteiro("Escolha uma opção: ");
 
             switch (opcao) {
-                case 1 -> cadastrar();
-                case 2 -> alterarObjetivo();
-                case 3 -> deletar();
-                case 4 -> listar();
-                case 0 -> System.out.println("Voltando...");
+                case 1 :
+                    cadastrar();
+                    break;
+                case 2 :
+                    alterarTreinos();
+                    break;
+                case 3 :
+                    deletar();
+                    break;
+                case 4 :
+                    listar();
+                    break;
+                case 5 :
+                    System.out.println("Voltando...");
+                    break;
+                default:
+                    System.out.println("");
+                    break;
             }
-        } while (opcao != 0);
+        } while (opcao != 5);
     }
 
     private static void mostrarOpcoesDeTreino() {
         System.out.println("--- OBJETIVOS DISPONÍVEIS ---");
-        System.out.println("1. Hipertrofia (Ficar Musculoso)");
+        System.out.println("1. Ficar Musculoso");
         System.out.println("2. Emagrecimento");
         System.out.println("3. Definição Muscular");
         System.out.println("4. Resistência Muscular");
@@ -48,7 +61,7 @@ public class TreinoView {
     }
 
     private static void cadastrar() {
-        System.out.println("\n--- CADASTRAR NOVO TREINO ---");
+        System.out.println("--- CADASTRAR NOVO TREINO ---");
         int id = InputHelper.pegarNumInteiro("ID do Treino: ");
         if (id == -1) return;
 
@@ -81,8 +94,8 @@ public class TreinoView {
         }
     }
 
-    private static void alterarObjetivo() {
-        System.out.println("\n--- ALTERAR OBJETIVOS DO TREINO ---");
+    private static void alterarTreinos() {
+        System.out.println("--- ALTERAR OBJETIVOS DO TREINO ---");
         int id = InputHelper.pegarNumInteiro("Digite o ID do Treino que deseja mudar: ");
         Treino treinoExistente = treinoController.buscarPorId(id);
 
@@ -115,7 +128,7 @@ public class TreinoView {
     }
 
     private static void listar() {
-        System.out.println("\n--- LISTA GERAL DE TREINOS ---");
+        System.out.println("--- LISTA GERAL DE TREINOS ---");
         if (treinoController.listarTreinos().isEmpty()) {
             System.out.println("Nenhum treino montado ainda.");
             return;

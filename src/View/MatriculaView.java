@@ -10,7 +10,7 @@ import util.InputHelper;
 public class MatriculaView {
 
     private static MatriculaController matriculaController = new MatriculaController();
-    private static AlunoController     alunoController     = new AlunoController();
+    private static AlunoController alunoController = new AlunoController();
 
     public static void exibirMenu() {
         int opcao;
@@ -25,19 +25,30 @@ public class MatriculaView {
             opcao = InputHelper.pegarNumInteiro("Escolha uma opção: ");
 
             switch (opcao) {
-                case 1:  cadastrar(); break;
-                case 2:  alterar();   break;
-                case 3:  deletar();   break;
-                case 4:  listar();    break;
-                case 0:  System.out.println("Voltando..."); break;
-                default: System.out.println("Opção inválida!"); break;
+                case 1 :
+                    cadastrar();
+                    break;
+                case 2 :
+                    alterar();
+                    break;
+                case 3 :
+                    deletar();
+                    break;
+                case 4 :
+                    listar();
+                    break;
+                case 0 :
+                    System.out.println("Voltando...");
+                    break;
+                default :
+                    System.out.println("Opção inválida!");
+                    break;
             }
-        } while (opcao != 0);
+        } while (opcao != 5);
     }
 
     private static void cadastrar() {
         System.out.println("\n--- NOVA MATRÍCULA ---");
-
         int idMatricula = InputHelper.pegarNumInteiro("ID da Matrícula: ");
         if (idMatricula == -1) return;
 
@@ -49,60 +60,80 @@ public class MatriculaView {
             return;
         }
 
-        Plano planoEscolhido = escolherPlano();
-        if (planoEscolhido == null) {
-            System.out.println("Opção de plano inválida!");
-            return;
-        }
+        System.out.println("Escolha o Plano Acadêmico:\n1. Mensal (R$ 120,00)\n2. Anual (R$ 1188,00 - R$ 99/mês)");
+        int opcaoPlano = InputHelper.pegarNumInteiro("Opção: ");
 
-        // Desconto de estudante disponível apenas no plano anual
-        if (planoEscolhido == Plano.ANUAL) {
-            System.out.println("Aplicar desconto de estudante (10%)? (1-Sim / 2-Não)");
+        Plano planoEscolhido = new Plano();
+        planoEscolhido.setAluno(alunoObj.getNome()); // O campo 'aluno' no seu Plano é uma String
+
+        if (opcaoPlano == 2) {
+            planoEscolhido.setId("PLN-ANUAL");
+            System.out.println("Aplicar desconto de estudante no Plano Anual? (1-Sim / 2-Não)");
             int descOpcao = InputHelper.pegarNumInteiro("Opção: ");
+
+            double valorBase = 1188.0;
+            planoEscolhido.setDuracaoMeses(12);
+            planoEscolhido.setDescricao("Plano Anual Fit");
+
             if (descOpcao == 1) {
-                double valorComDesconto = planoEscolhido.calcularDesconto(10);
-                System.out.printf("Desconto aplicado! Valor com desconto: R$ %.2f%n", valorComDesconto);
+                double valorComDesconto = planoEscolhido.calcularDesconto(10); // 10% de desconto
+                planoEscolhido.setValor(valorComDesconto);
+            } else {
+                planoEscolhido.setValor(valorBase);
             }
+        } else {
+            planoEscolhido.setId("PLN-MENSAL");
+            planoEscolhido.setValor(120.0);
+            planoEscolhido.setDuracaoMeses(1);
+            planoEscolhido.setDescricao("Plano Mensal Padrão");
         }
 
         String dataInicio = InputHelper.pegarTexto("Data de Início (dd/mm/aaaa): ");
-        String dataFinal  = InputHelper.pegarTexto("Data de Término (dd/mm/aaaa): ");
+        String dataFinal = InputHelper.pegarTexto("Data de Término (dd/mm/aaaa): ");
 
         Matricula nova = new Matricula(idMatricula, alunoObj, planoEscolhido, dataInicio, dataFinal, true);
         matriculaController.matriculaAluno(nova);
 
         System.out.println("\nAluno " + alunoObj.getNome() + " matriculado com sucesso!");
-        System.out.printf("Plano: %s | Valor Total: R$ %.2f%n",
-                planoEscolhido.getDescricao(), planoEscolhido.getValor());
-        System.out.printf("Mensalidade: R$ %.2f/mês%n",
-                planoEscolhido.calcularMensalidade());
+        System.out.println("Plano: " + planoEscolhido.getDescricao() + " | Valor Total: R$ " + planoEscolhido.getValor());
+        System.out.println("Mensalidade calculada: R$ " + planoEscolhido.calcularMensalidade() + "/mês");
     }
 
     private static void alterar() {
         System.out.println("\n--- ALTERAR MATRÍCULA ---");
-
         int id = InputHelper.pegarNumInteiro("Digite o ID da Matrícula: ");
         Matricula mat = matriculaController.buscaPorId(id);
 
-        if (mat == null) {
+        if (mat != null) {
+            System.out.println("Alterando matrícula de: " + mat.getAluno().getNome());
+            System.out.println("Plano Atual: " + mat.getPlano().getDescricao());
+
+            System.out.println("Escolha o Novo Plano:1. Mensal2. Anual");
+            int opcaoPlano = InputHelper.pegarNumInteiro("Opção: ");
+
+            Plano novoPlano = new Plano();
+            novoPlano.setAluno(mat.getAluno().getNome());
+
+            if (opcaoPlano == 2) {
+                novoPlano.setId("PLN-ANUAL");
+                novoPlano.setValor(1188.0);
+                novoPlano.setDuracaoMeses(12);
+                novoPlano.setDescricao("Plano Anual Fit");
+            } else {
+                novoPlano.setId("PLN-MENSAL");
+                novoPlano.setValor(120.0);
+                novoPlano.setDuracaoMeses(1);
+                novoPlano.setDescricao("Plano Mensal Padrão");
+            }
+
+            String novaDataInic = InputHelper.pegarTexto("Nova Data de Início: ");
+            String novaDataFin = InputHelper.pegarTexto("Nova Data de Término: ");
+
+            matriculaController.alterarMatricula(id, novoPlano, novaDataInic, novaDataFin);
+            System.out.println("Matrícula atualizada com sucesso!");
+        } else {
             System.out.println("Matrícula não encontrada.");
-            return;
         }
-
-        System.out.println("Aluno: "       + mat.getAluno().getNome());
-        System.out.println("Plano Atual: " + mat.getPlano().getDescricao());
-
-        Plano novoPlano = escolherPlano();
-        if (novoPlano == null) {
-            System.out.println("Opção de plano inválida!");
-            return;
-        }
-
-        String novaDataInicio = InputHelper.pegarTexto("Nova Data de Início (dd/mm/aaaa): ");
-        String novaDataFinal  = InputHelper.pegarTexto("Nova Data de Término (dd/mm/aaaa): ");
-
-        matriculaController.alterarMatricula(id, novoPlano, novaDataInicio, novaDataFinal);
-        System.out.println("Matrícula atualizada com sucesso!");
     }
 
     private static void deletar() {
@@ -110,7 +141,7 @@ public class MatriculaView {
         if (matriculaController.removerMatricula(id)) {
             System.out.println("Matrícula removida!");
         } else {
-            System.out.println("Matrícula não encontrada.");
+            System.out.println("Não encontrada.");
         }
     }
 
@@ -121,31 +152,12 @@ public class MatriculaView {
             return;
         }
         for (Matricula m : matriculaController.listarMatriculados()) {
-            System.out.printf("ID: %d | Aluno: %s | Plano: %s | Valor: R$ %.2f | Mensalidade: R$ %.2f/mês | Ativo: %b%n",
-                    m.getId(),
-                    m.getAluno().getNome(),
-                    m.getPlano().getDescricao(), // era getId() — não existe em Plano
-                    m.getPlano().getValor(),
-                    m.getPlano().calcularMensalidade(),
-                    m.isAtivo());
-        }
-    }
-
-    private static Plano escolherPlano() {
-        System.out.println("Escolha o Plano:");
-        System.out.printf("1. %s  — R$ %.2f/mês%n",
-                Plano.MENSAL.getDescricao(), Plano.MENSAL.getValor());
-        System.out.printf("2. %s  — R$ %.2f total (R$ %.2f/mês)%n",
-                Plano.SEMESTRAL.getDescricao(), Plano.SEMESTRAL.getValor(), Plano.SEMESTRAL.calcularMensalidade());
-        System.out.printf("3. %s  — R$ %.2f total (R$ %.2f/mês)%n",
-                Plano.ANUAL.getDescricao(), Plano.ANUAL.getValor(), Plano.ANUAL.calcularMensalidade());
-
-        int opcao = InputHelper.pegarNumInteiro("Opção: ");
-        switch (opcao) {
-            case 1: return Plano.MENSAL;
-            case 2: return Plano.SEMESTRAL;
-            case 3: return Plano.ANUAL;
-            default: return null;
+            System.out.print("ID Matrícula: " + m.getId());
+            System.out.print(" | Aluno: " + m.getAluno().getNome());
+            System.out.print(" | Código Plano: " + m.getPlano().getId());
+            System.out.print(" | Descrição: " + m.getPlano().getDescricao());
+            System.out.print(" | Valor: R$ " + m.getPlano().getValor());
+            System.out.println(" | Ativo: " + m.isAtivo());
         }
     }
 }
