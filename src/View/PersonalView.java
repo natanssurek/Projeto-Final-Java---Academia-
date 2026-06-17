@@ -55,7 +55,10 @@ public class PersonalView {
 
     public void cadastrar() {
 
+<<<<<<< HEAD
         int id = InputHelper.pegarNumInteiro("ID: ");
+=======
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
         String nome = InputHelper.pegarTexto("Nome: ");
         String cpf = InputHelper.pegarTexto("CPF: ");
         String email = InputHelper.pegarTexto("Email: ");
@@ -63,7 +66,11 @@ public class PersonalView {
         String numbCertificacao = InputHelper.pegarTexto("Número da certificação: ");
         String especialidade = InputHelper.pegarTexto("Especialidade: ");
 
+<<<<<<< HEAD
         PersonalTrainer personal = new PersonalTrainer(id, nome, cpf, email, telefone, numbCertificacao, especialidade);
+=======
+        PersonalTrainer personal = new PersonalTrainer(nome, cpf, email, telefone, numbCertificacao, especialidade);
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
 
         personalController.cadastrarPersonal(personal);
 
@@ -77,7 +84,11 @@ public class PersonalView {
     }
 
     public void buscarPorId() {
+<<<<<<< HEAD
         int id = InputHelper.pegarNumInteiro("Digite o ID: ");
+=======
+        String id = InputHelper.pegarTexto("Digite o ID: ");
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
 
         PersonalTrainer personal = personalController.buscarPorIdPersonal(id);
 
@@ -91,7 +102,11 @@ public class PersonalView {
 
     public void alterarPersonal() {
 
+<<<<<<< HEAD
         int id = InputHelper.pegarNumInteiro("ID do personal: ");
+=======
+        String id = InputHelper.pegarTexto("ID do personal (ex: PERSONAL-1): ");
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
 
         String nome = InputHelper.pegarTexto("Novo nome: ");
         String cpf = InputHelper.pegarTexto("Novo CPF: ");
@@ -100,6 +115,7 @@ public class PersonalView {
         String numbCertificacao = InputHelper.pegarTexto("Nova certificação: ");
         String especialidade = InputHelper.pegarTexto("Nova especialidade: ");
 
+<<<<<<< HEAD
         PersonalTrainer personalAtualizado = new PersonalTrainer(id, nome, cpf, email, telefone, numbCertificacao, especialidade);
 
         boolean alterou = personalController.alterarPersonal(personalAtualizado);
@@ -108,12 +124,25 @@ public class PersonalView {
             System.out.println("Personal alterado com sucesso.");
         }
         else {
+=======
+        PersonalTrainer personalAtualizado = new PersonalTrainer(nome, cpf, email, telefone, numbCertificacao, especialidade);
+
+        boolean alterou = personalController.alterarPersonal(id, personalAtualizado);
+
+        if (alterou) {
+            System.out.println("Personal alterado com sucesso.");
+        } else {
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
             System.out.println("Personal não encontrado.");
         }
     }
 
     public void deletarPersonal() {
+<<<<<<< HEAD
         int id = InputHelper.pegarNumInteiro("ID do personal: ");
+=======
+        String id = InputHelper.pegarTexto("ID do personal: ");
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
 
         boolean deletou = personalController.deletarPersonal(id);
 

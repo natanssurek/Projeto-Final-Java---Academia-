@@ -1,15 +1,29 @@
 package View;
 
 import Controller.AlunoController;
+<<<<<<< HEAD
 import Model.Aluno;
+=======
+import Controller.PlanoController;
+import Model.Aluno;
+import Model.Plano;
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
 import util.InputHelper;
 
 public class AlunoView {
 
     private AlunoController alunoController;
+<<<<<<< HEAD
 
     public AlunoView(AlunoController alunoController) {
         this.alunoController = alunoController;
+=======
+    private PlanoController planoController;
+
+    public AlunoView(AlunoController alunoController) {
+        this.alunoController = alunoController;
+        this.planoController = new PlanoController();
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
     }
 
     public void exibirMenuAluno() {
@@ -60,7 +74,10 @@ public class AlunoView {
     }
 
     public void cadastrarAluno() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
         int id = InputHelper.pegarNumInteiro("ID: ");
         String nome = InputHelper.pegarTexto("Nome: ");
         String cpf = InputHelper.pegarTexto("CPF: ");
@@ -69,8 +86,18 @@ public class AlunoView {
         String matricula = InputHelper.pegarTexto("Matrícula: ");
         String objetivo = InputHelper.pegarTexto("Objetivo: ");
 
+<<<<<<< HEAD
         Aluno aluno = new Aluno(id, nome, cpf, email, telefone, matricula, objetivo);
 
+=======
+        planoController.exibirPlanos();
+        int opcao = InputHelper.pegarNumInteiro("Escolha o Plano (1-3): ");
+        Plano plano = planoController.selecionarPlano(opcao);
+
+        if (plano == null) return;
+
+        Aluno aluno = new Aluno(id, nome, cpf, email, telefone, matricula, objetivo, plano);
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
         alunoController.cadastrarAluno(aluno);
 
         System.out.println("Aluno cadastrado com sucesso.");
@@ -107,6 +134,7 @@ public class AlunoView {
         String matricula = InputHelper.pegarTexto("Nova matrícula: ");
         String objetivo = InputHelper.pegarTexto("Novo objetivo: ");
 
+<<<<<<< HEAD
         Aluno alunoAtualizado = new Aluno(id, nome, cpf, email, telefone, matricula, objetivo);
 
         boolean alterou =
@@ -116,6 +144,21 @@ public class AlunoView {
             System.out.println("Aluno alterado com sucesso.");
         }
         else {
+=======
+        planoController.exibirPlanos();
+        int opcao = InputHelper.pegarNumInteiro("Escolha o novo Plano (1-3): ");
+        Plano plano = planoController.selecionarPlano(opcao);
+
+        if (plano == null) return;
+
+        Aluno alunoAtualizado = new Aluno(id, nome, cpf, email, telefone, matricula, objetivo, plano);
+
+        boolean alterou = alunoController.alterarAluno(alunoAtualizado);
+
+        if (alterou) {
+            System.out.println("Aluno alterado com sucesso.");
+        } else {
+>>>>>>> c1d44c5 (Criei o PlanoController e ajeitei o ID em personal e aluno)
             System.out.println("Aluno não encontrado.");
         }
     }
