@@ -2,7 +2,7 @@ GymTonica — Sistema de Gerenciamento de Academia
 Descrição
 O GymTonica é um sistema de gerenciamento de academia desenvolvido em Java, seguindo o padrão arquitetural MVC (Model-View-Controller). O sistema permite gerenciar alunos, personal trainers, matrículas, pagamentos e treinos de forma integrada, com geração automática de IDs e registro de logs em arquivo .txt.
 
-Tecnologias Utilizadas
+Tecnologias Utilizadas 
 
 Java 17+
 Paradigma de Orientação a Objetos
