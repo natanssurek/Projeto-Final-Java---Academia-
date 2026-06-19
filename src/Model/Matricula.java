@@ -2,15 +2,17 @@ package Model;
 
 public class Matricula {
 
-    private int id;
+    private static int contador = 1;
+    private String id;
+
     private Aluno aluno;
     private Plano plano;
     private String dataInicio;
     private String dataFinal;
     private boolean ativo;
 
-    public Matricula(int id, Aluno aluno, Plano plano, String dataInicio, String dataFinal, boolean ativo) {
-        this.id = id;
+    public Matricula(Aluno aluno, Plano plano, String dataInicio, String dataFinal, boolean ativo) {
+        this.id = "ID MATRICULA-" + contador++;
         this.aluno = aluno;
         this.plano = plano;
         this.dataInicio = dataInicio;
@@ -18,55 +20,21 @@ public class Matricula {
         this.ativo = ativo;
     }
 
-    public int getId() {
-        return id;
-    }
+    public String getId() { return id; } // <- String
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Aluno getAluno() { return aluno; }
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
-    public Aluno getAluno() {
-        return aluno;
-    }
+    public Plano getPlano() { return plano; }
+    public void setPlano(Plano plano) { this.plano = plano; }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
+    public String getDataInicio() { return dataInicio; }
+    public void setDataInicio(String dataInicio) { this.dataInicio = dataInicio; }
 
-    public Plano getPlano() {
-        return plano;
-    }
+    public String getDataFinal() { return dataFinal; }
+    public void setDataFinal(String dataFinal) { this.dataFinal = dataFinal; }
 
-    public void setPlano(Plano plano) {
-        this.plano = plano;
-    }
-
-    public String getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public String getDataFinal() {
-        return dataFinal;
-    }
-
-    public void setDataFinal(String dataFinal) {
-        this.dataFinal = dataFinal;
-    }
-
-    public void ativar() {
-        this.ativo = true;
-    }
-
-    public void desativar() {
-        this.ativo = false;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
+    public void ativar() { this.ativo = true; }
+    public void desativar() { this.ativo = false; }
+    public boolean isAtivo() { return ativo; }
 }

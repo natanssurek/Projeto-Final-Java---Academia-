@@ -12,44 +12,51 @@ import java.util.List;
 
 public class PagamentoView {
 
-    static ControllerPagamento controllerPagamento = new ControllerPagamento();
-    static AlunoController alunoController = new AlunoController();
+    private AlunoController alunoController;
+    private ControllerPagamento controllerPagamento;
 
-    public static void rodarMenuPagamento() {
-        int opcao = 0;
+    public PagamentoView(AlunoController alunoController, ControllerPagamento controllerPagamento) {
+        this.alunoController = alunoController;
+        this.controllerPagamento = controllerPagamento;
+    }
+
+    public void rodarMenuPagamento() {
+        int opcao;
         do {
             opcao = exibirMenuPagamento();
             escolherOpcaoPagamento(opcao);
         } while (opcao != 6);
     }
 
-    public static void escolherOpcaoPagamento(int opcao) {
-        switch (opcao) {
-            case 1 -> cadastrarPresencial();
-            case 2 -> cadastrarOnline();
-            case 3 -> alterar();
-            case 4 -> deletar();
-            case 5 -> listar();
-            case 6 -> System.out.println("Saindo...");
-            default -> System.out.println("Digite uma opção válida!");
-        }
-    }
-
-    public static int exibirMenuPagamento() {
+    public int exibirMenuPagamento() {
         System.out.println("---> MENU PAGAMENTO <---");
         System.out.println("1. Cadastrar pagamento presencial");
         System.out.println("2. Cadastrar pagamento online");
         System.out.println("3. Alterar dados do pagamento");
         System.out.println("4. Deletar dados do pagamento");
         System.out.println("5. Listar pagamentos");
-        System.out.println("6. Sair");
+        System.out.println("6. Voltar");
         System.out.println("------------------------");
         return InputHelper.pegarNumInteiro("Digite o número da ação escolhida:");
     }
 
-    public static void cadastrarOnline() {
-        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
+    public void escolherOpcaoPagamento(int opcao) {
+        switch (opcao) {
+            case 1 -> cadastrarPresencial();
+            case 2 -> cadastrarOnline();
+            case 3 -> alterar();
+            case 4 -> deletar();
+            case 5 -> listar();
+            case 6 -> System.out.println("Voltando...");
+            default -> System.out.println("Digite uma opção válida!");
+        }
+    }
+
+    public void cadastrarOnline() {
+        String idAluno = InputHelper.pegarTexto("Digite o ID do aluno (ex: ID ALUNO-1): ");
         Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
+
+        if (aluno == null) { System.out.println("Aluno não encontrado!"); return; }
 
         String data = InputHelper.pegarTexto("Digite a data:");
         String plataforma = InputHelper.pegarTexto("Digite a plataforma:");
@@ -58,9 +65,14 @@ public class PagamentoView {
         System.out.println("Cadastro de pagamento online realizado com sucesso!");
     }
 
-    public static void cadastrarPresencial() {
-        int idAluno = InputHelper.pegarNumInteiro("Digite o ID do aluno:");
+    public void cadastrarPresencial() {
+        String idAluno = InputHelper.pegarTexto("Digite o ID do aluno (ex: ID ALUNO-1): ");
         Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
+
+        if (aluno == null) {
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
 
         String data = InputHelper.pegarTexto("Digite a data:");
         String formaPagamento = InputHelper.pegarTexto("Digite a forma de pagamento:");
@@ -69,8 +81,8 @@ public class PagamentoView {
         System.out.println("Cadastro de pagamento presencial realizado com sucesso!");
     }
 
-    public static void alterar() {
-        String id = InputHelper.pegarTexto("Digite o ID do pagamento:");
+    public void alterar() {
+        String id = InputHelper.pegarTexto("Digite o ID do pagamento (ex: ID PAGAMENTO-): :");
         Pagamento p = controllerPagamento.buscarPorId(id);
         if (p == null) { System.out.println("Pagamento inexistente!"); return; }
         System.out.println(p.exibirInfo());
@@ -80,15 +92,18 @@ public class PagamentoView {
 
         if (controllerPagamento.alterar(id, data, status)) {
             System.out.println("Pagamento alterado com sucesso!");
-        } else {
+        }
+        else {
             System.out.println("Pagamento inexistente!");
         }
     }
 
-    public static void deletar() {
-        String id = InputHelper.pegarTexto("Digite o ID do pagamento que deseja deletar:");
+    public void deletar() {
+        String id = InputHelper.pegarTexto("Digite o ID do pagamento que deseja deletar (ex: ID PAGAMENTO-):");
         Pagamento p = controllerPagamento.buscarPorId(id);
-        if (p == null) { System.out.println("Pagamento inexistente!"); return; }
+        if (p == null) {
+            System.out.println("Pagamento inexistente!"); return;
+        }
         System.out.println(p.exibirInfo());
 
         int confirmacao = InputHelper.pegarNumInteiro("Confirmar exclusão? (1-Sim / 0-Não):");
@@ -98,12 +113,13 @@ public class PagamentoView {
             } else {
                 System.out.println("Pagamento inexistente!");
             }
-        } else {
+        }
+        else {
             System.out.println("Exclusão cancelada!");
         }
     }
 
-    public static void listarTodos() {
+    public void listarTodos() {
         System.out.println("---> PAGAMENTOS ONLINE <---");
         for (PagamentoOnline p : controllerPagamento.getListaPagamentoOnline()) {
             System.out.println(p.exibirInfo());
@@ -117,7 +133,7 @@ public class PagamentoView {
         }
     }
 
-    public static void listar() {
+    public void listar() {
         System.out.println("---> FORMAS DE LISTAMENTO <---");
         System.out.println("1. Listar todos os pagamentos");
         System.out.println("2. Buscar por ID");
@@ -128,7 +144,7 @@ public class PagamentoView {
         switch (opcao) {
             case 1 -> listarTodos();
             case 2 -> {
-                String id = InputHelper.pegarTexto("Digite o ID:");
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID PAGAMENTO-):");
                 Pagamento p = controllerPagamento.buscarPorId(id);
                 if (p != null) System.out.println(p.exibirInfo());
                 else System.out.println("Pagamento inexistente!");
@@ -143,4 +159,3 @@ public class PagamentoView {
         }
     }
 }
-

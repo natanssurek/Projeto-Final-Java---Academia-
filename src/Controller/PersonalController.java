@@ -15,35 +15,58 @@ public class PersonalController {
         return listaPersonais;
     }
 
-    public PersonalTrainer buscarPorIdPersonal(String id) { // <- String
+    public PersonalTrainer buscarPorIdPersonal(String id) {
         for (PersonalTrainer personal : listaPersonais) {
-            if (personal.getIdPersonal().equals(id)) { // <- getIdPersonal() e equals()
+            if (personal.getIdPersonal().equals(id)) {
                 return personal;
             }
         }
         return null;
     }
 
-    /// PRETENDO FAZER MAIS MÉTODOS DE BUSCAR COMO: BUSCAR POR CPF, CREF, NOME
-
-    public boolean alterarPersonal(String id, PersonalTrainer personalAtualizado) { // <- String id separado
-        PersonalTrainer personalEncontrado = buscarPorIdPersonal(id);
-
-        if (personalEncontrado != null) {
-            listaPersonais.remove(personalEncontrado);
-            listaPersonais.add(personalAtualizado);
-            return true;
+    public PersonalTrainer buscarPorCPFPersonal(String cpf) {
+        for (PersonalTrainer personal : listaPersonais) {
+            if (personal.getCpf().equals(cpf)) {
+                return personal;
+            }
         }
-        return false;
+        return null;
     }
 
-    public boolean deletarPersonal(String id) { // <- String
+    public PersonalTrainer buscarPorCrefPersonal(String cref) {
+        for (PersonalTrainer personal : listaPersonais) {
+            if (personal.getCref().equals(cref)) {
+                return personal;
+            }
+        }
+        return null;
+    }
+
+    public void alterarPersonal(String id, PersonalTrainer personalAtualizado) {
         PersonalTrainer personalEncontrado = buscarPorIdPersonal(id);
 
         if (personalEncontrado != null) {
-            listaPersonais.remove(personalEncontrado);
-            return true;
+            personalEncontrado.setNome(personalAtualizado.getNome());
+            personalEncontrado.setEmail(personalAtualizado.getEmail());
+            personalEncontrado.setTelefone(personalAtualizado.getTelefone());
+            personalEncontrado.setCref(personalAtualizado.getCref());
+            personalEncontrado.setEspecialidade(personalAtualizado.getEspecialidade());
         }
-        return false;
+    }
+
+    public void alterarPersonal(String cpf, PersonalTrainer personalAtualizado, boolean porCpf) {
+        PersonalTrainer personalEncontrado = buscarPorCPFPersonal(cpf);
+
+        if (personalEncontrado != null) {
+            personalEncontrado.setNome(personalAtualizado.getNome());
+            personalEncontrado.setEmail(personalAtualizado.getEmail());
+            personalEncontrado.setTelefone(personalAtualizado.getTelefone());
+            personalEncontrado.setCref(personalAtualizado.getCref());
+            personalEncontrado.setEspecialidade(personalAtualizado.getEspecialidade());
+        }
+    }
+
+    public void deletarPersonal(PersonalTrainer personal) {
+        listaPersonais.remove(personal);
     }
 }

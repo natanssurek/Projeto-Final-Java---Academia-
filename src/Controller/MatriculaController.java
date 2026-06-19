@@ -13,7 +13,7 @@ public class MatriculaController {
         alunosMatriculados.add(matricula);
     }
 
-    public boolean alterarMatricula(int id, Plano novoPlano, String novaDataInicio, String novaDataFinal) {
+    public boolean alterarMatricula(String id, Plano novoPlano, String novaDataInicio, String novaDataFinal) { // <- String
         Matricula matriculaExistente = buscaPorId(id);
 
         if (matriculaExistente != null) {
@@ -25,17 +25,17 @@ public class MatriculaController {
         return false;
     }
 
-    public boolean removerMatricula(int id) {
-        return alunosMatriculados.removeIf(m -> m.getId() == id);
+    public boolean removerMatricula(String id) { // <- String
+        return alunosMatriculados.removeIf(m -> m.getId().equals(id)); // <- equals()
     }
 
     public List<Matricula> listarMatriculados() {
         return alunosMatriculados;
     }
 
-    public Matricula buscaPorId(int id) {
+    public Matricula buscaPorId(String id) { // <- String
         for (Matricula m : alunosMatriculados) {
-            if (m.getId() == id) {
+            if (m.getId().equals(id)) { // <- equals()
                 return m;
             }
         }

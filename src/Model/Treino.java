@@ -2,7 +2,9 @@ package Model;
 
 public class Treino {
 
-    private int id;
+    private static int contador = 1;
+    private String id;
+
     private Aluno aluno;
     private PersonalTrainer personal;
     private String data;
@@ -10,8 +12,8 @@ public class Treino {
     private int duracaoMinutos;
     private String observacoes;
 
-    public Treino(int id, Aluno aluno, PersonalTrainer personal, String data, String tipo, int duracaoMinutos, String observacoes) {
-        this.id = id;
+    public Treino(Aluno aluno, PersonalTrainer personal, String data, String tipo, int duracaoMinutos, String observacoes) {
+        this.id = "TREINO-" + contador++;
         this.aluno = aluno;
         this.personal = personal;
         this.data = data;
@@ -20,18 +22,13 @@ public class Treino {
         this.observacoes = observacoes;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Aluno getAluno() {
         return aluno;
     }
-
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
@@ -39,7 +36,6 @@ public class Treino {
     public PersonalTrainer getPersonalTrainer() {
         return personal;
     }
-
     public void setPersonalTrainer(PersonalTrainer personal) {
         this.personal = personal;
     }
@@ -47,7 +43,6 @@ public class Treino {
     public String getData() {
         return data;
     }
-
     public void setData(String data) {
         this.data = data;
     }
@@ -55,7 +50,6 @@ public class Treino {
     public String getTipo() {
         return tipo;
     }
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -63,7 +57,6 @@ public class Treino {
     public int getDuracaoMinutos() {
         return duracaoMinutos;
     }
-
     public void setDuracaoMinutos(int duracaoMinutos) {
         this.duracaoMinutos = duracaoMinutos;
     }
@@ -71,7 +64,6 @@ public class Treino {
     public String getObservacoes() {
         return observacoes;
     }
-
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }

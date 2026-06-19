@@ -15,35 +15,55 @@ public class AlunoController {
         return listaAlunos;
     }
 
-    public Aluno buscarPorIdAluno(int id) {
+    public Aluno buscarPorIdAluno(String id) {
         for (Aluno aluno : listaAlunos) {
-            if (aluno.getId() == id) {
+            if (aluno.getIdAluno().equals(id)) {
                 return aluno;
             }
         }
         return null;
     }
 
-    //PRETENDO FAZER MAIS MÉTODOS DE BUSCAR COMO: BUSCAR POR CPF, MATRÍCULA, NOME
-
-    public boolean alterarAluno(Aluno alunoAtualizado) {
-        Aluno alunoEncontrado = buscarPorIdAluno(alunoAtualizado.getId());
-
-        if (alunoEncontrado != null) {
-            listaAlunos.remove(alunoEncontrado);
-            listaAlunos.add(alunoAtualizado);
-            return true;
+    public Aluno buscarPorCPFAluno(String cpf) {
+        for (Aluno aluno : listaAlunos) {
+            if (aluno.getCpf().equals(cpf)) {
+                return aluno;
+            }
         }
-        return false;
+        return null;
     }
 
-    public boolean deletarAluno(int id) {
+    public void alterarAlunoPorId(String id, Aluno alunoAtualizado) {
+        Aluno alunoEncontrado = buscarPorIdAluno(id);
+
+        if (alunoEncontrado != null) {
+            alunoEncontrado.setNome(alunoAtualizado.getNome());
+            alunoEncontrado.setEmail(alunoAtualizado.getEmail());
+            alunoEncontrado.setTelefone(alunoAtualizado.getTelefone());
+            alunoEncontrado.setMatricula(alunoAtualizado.getMatricula());
+            alunoEncontrado.setObjetivo(alunoAtualizado.getObjetivo());
+            alunoEncontrado.setPlano(alunoAtualizado.getPlano());
+        }
+    }
+
+    public void alterarAlunoPorCpf(String cpf, Aluno alunoAtualizado) {
+        Aluno alunoEncontrado = buscarPorCPFAluno(cpf);
+
+        if (alunoEncontrado != null) {
+            alunoEncontrado.setNome(alunoAtualizado.getNome());
+            alunoEncontrado.setEmail(alunoAtualizado.getEmail());
+            alunoEncontrado.setTelefone(alunoAtualizado.getTelefone());
+            alunoEncontrado.setMatricula(alunoAtualizado.getMatricula());
+            alunoEncontrado.setObjetivo(alunoAtualizado.getObjetivo());
+            alunoEncontrado.setPlano(alunoAtualizado.getPlano());
+        }
+    }
+
+    public void deletarAluno(String id) {
         Aluno alunoEncontrado = buscarPorIdAluno(id);
 
         if (alunoEncontrado != null) {
             listaAlunos.remove(alunoEncontrado);
-            return true;
         }
-        return false;
     }
 }

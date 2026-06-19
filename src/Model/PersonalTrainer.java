@@ -15,16 +15,23 @@ public class PersonalTrainer extends Pessoa {
         this.especialidade = especialidade;
     }
 
-    public String getIdPersonal() { return idPersonal; }
-
-    public String getCCref() { return cref; }
-
-    public void setNumbCertificacao(String numbCertificacao) {
-        this.cref = numbCertificacao;
+    public String getIdPersonal() {
+        return idPersonal;
     }
 
-    public String getEspecialidade() { return especialidade; }
-    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
+    public String getCref() {
+        return cref;
+    }
+    public void setCref(String cref) {
+        this.cref = cref;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
 
     @Override
     public String exibirInfo() {

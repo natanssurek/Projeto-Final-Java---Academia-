@@ -65,7 +65,7 @@ public class PagamentoOnline extends Pagamento implements Pagavel {
         return "\n=== PAGAMENTO ONLINE ===" +
                 "\nID: " + getId() +
                 "\nAluno: " + getAluno().getNome() +
-                "\nValor: " + getValor() +
+                "\nValor: " + calcularValor() +
                 "\nData: " + getData() +
                 "\nStatus: " + (getStatus() ? "Pago" : "Pendente") +
                 "\nPlataforma: " + plataforma +

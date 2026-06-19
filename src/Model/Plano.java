@@ -10,7 +10,7 @@ public class Plano implements Calculavel {
     private double valor;
     private int duracaoMeses;
 
-    private Plano(String descricao, double valor, int duracaoMeses) {
+    public Plano(String descricao, double valor, int duracaoMeses) {
         this.descricao = descricao;
         this.valor = valor;
         this.duracaoMeses = duracaoMeses;

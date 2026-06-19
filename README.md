@@ -1,147 +1,141 @@
-# 🏋️ Academia GymTonica — Sistema de Gerenciamento
+GymTonica — Sistema de Gerenciamento de Academia
+Descrição
+O GymTonica é um sistema de gerenciamento de academia desenvolvido em Java, seguindo o padrão arquitetural MVC (Model-View-Controller). O sistema permite gerenciar alunos, personal trainers, matrículas, pagamentos e treinos de forma integrada, com geração automática de IDs e registro de logs em arquivo .txt.
 
-Sistema de gerenciamento de academia desenvolvido em Java, aplicando os princípios de **Programação Orientada a Objetos** com arquitetura **MVC (Model-View-Controller)**.
+Tecnologias Utilizadas
 
----
+Java 17+
+Paradigma de Orientação a Objetos
+Padrão MVC
+java.util.logging para logs
+Arquivo .txt para persistência de logs
 
-## 📋 Sobre o Projeto
 
-O GymTonica é um sistema console para administração de uma academia, permitindo o cadastro e gerenciamento de alunos, personal trainers, planos, matrículas, treinos e pagamentos.
-
----
-
-## 🏗️ Arquitetura
-
-O projeto segue o padrão **MVC**, dividido em três camadas:
-
-```
+Estrutura do Projeto
 src/
-├── model/          # Entidades e regras de negócio
-├── controller/     # Lógica de controle e manipulação dos dados
-└── view/           # Interface com o usuário (menus e interações)
-```
+├── Controller/
+│   ├── AlunoController.java
+│   ├── PersonalController.java
+│   ├── MatriculaController.java
+│   ├── ControllerPagamento.java
+│   └── TreinoController.java
+│
+├── Model/
+│   ├── Pessoa.java (abstract)
+│   ├── Aluno.java
+│   ├── PersonalTrainer.java
+│   ├── Plano.java
+│   ├── Matricula.java
+│   ├── Pagamento.java (abstract)
+│   ├── PagamentoOnline.java
+│   ├── PagamentoPresencial.java
+│   └── Treino.java
+│
+├── View/
+│   ├── MenuPrincipalView.java
+│   ├── AlunoView.java
+│   ├── PersonalView.java
+│   ├── MatriculaView.java
+│   ├── PagamentoView.java
+│   └── TreinoView.java
+│
+├── util/
+│   ├── InputHelper.java
+│   └── Logger.java
+│
+└── Main.java
 
----
+Funcionalidades
+Alunos
 
-## 📦 Model
+Cadastrar, listar, buscar por ID ou CPF, alterar e deletar alunos
+Geração automática de ID no formato ID ALUNO-1, ID ALUNO-2...
+Vinculação de plano no cadastro (Mensal, Semestral ou Anual)
 
-### Classes Abstratas
+Personal Trainers
 
-**`Pessoa` (Abstract)**
-- Atributos: `id`, `nome`, `cpf`, `email`, `telefone`
-- Métodos: `calcularIdade()` *(abstract)*, getters e setters
+Cadastrar, listar, buscar por ID, CPF ou CREF, alterar e deletar
+Geração automática de ID no formato ID PERSONAL-1, ID PERSONAL-2...
 
-**`Pagamento` (Abstract)**
-- Atributos: `id`, `aluno`, `valor`, `data`, `status`
-- Métodos: `calcularTotal()` *(abstract)*, `getTipoPagamento()` *(abstract)*, getters e setters
+Planos
 
-### Classes Concretas
+Três planos fixos disponíveis:
 
-**`Aluno` extends `Pessoa`**
-- Atributos: `matricula`, `objetivo`, `dataNascimento`
-- Métodos: `calcularIdade()`, getters e setters
+Mensal — R$ 100,00 / 1 mês
+Semestral — R$ 500,00 / 6 meses
+Anual — R$ 900,00 / 12 meses
 
-**`PersonalTrainer` extends `Pessoa`**
-- Atributos: `cref`, `especialidade`, `List<Aluno> alunos`
-- Métodos: `calcularIdade()`, `adicionarAlunos()`, `remover()`, getters e setters
 
-**`Plano` implements `Calculavel`**
-- Atributos: `id`, `nome`, `valor`, `duracaoMeses`, `descricao`
-- Métodos: `calcularMensalidade()`, `calcularDesconto()`, getters e setters
+Cálculo automático de mensalidade e desconto via interface Calculavel
 
-**`Matricula`**
-- Atributos: `id`, `aluno`, `plano`, `dataInicio`, `dataVencimento`, `ativa`
-- Métodos: `ativar()`, `desativar()`, `isAtiva()`, getters e setters
+Matrículas
 
-**`Treino`**
-- Atributos: `id`, `aluno`, `personal`, `data`, `tipo`, `duracaoMinutos`, `observacao`
-- Métodos: getters e setters
+Matricular aluno em um plano
+Alterar, remover e listar matrículas
+Geração automática de ID no formato MATRICULA-1, MATRICULA-2...
 
-**`PagamentoOnline` extends `Pagamento` implements `Pagavel`**
-- Atributos: `plataforma`, `taxaOnline`
-- Métodos: `pagar(Double)`, `pagar(Double, String)`, `calcularTotal()`, `getTipoPagamento()`, getters e setters
+Pagamentos
 
-**`PagamentoPresencial` extends `Pagamento` implements `Pagavel`**
-- Atributos: `formaPagamento`
-- Métodos: `pagar(Double)`, `pagar(Double, String)`, `calcularTotal()`, `getTipoPagamento()`, getters e setters
+Dois tipos: Presencial e Online
+Cadastrar, alterar status (pendente/pago), deletar e listar
+Busca por ID do pagamento ou nome do aluno
+Geração automática de ID no formato ID PAGAMENTO-1, ID PAGAMENTO-2...
 
-### Interfaces
+Treinos
 
-**`Calculavel`**
-- `calcularMensalidade()`
-- `calcularDesconto(Double)`
+Cadastrar treino vinculando aluno e personal trainer
+7 tipos de objetivo disponíveis: Hipertrofia, Emagrecimento, Definição, Resistência, Funcional, Força Bruta e Mobilidade
+Cada objetivo define automaticamente duração e rotina
+Geração automática de ID no formato TREINO-1, TREINO-2...
 
-**`Pagavel`**
-- `pagar(double)`
-- `pagar(double, String)`
-- `calcularTotal()`
 
----
+Geração Automática de IDs
+Todas as entidades geram seus próprios IDs automaticamente via contador estático, sem necessidade de input do usuário:
+javaprivate static int contador = 1;
+private String idAluno;
 
-## 🎮 Controller
+public Aluno(...) {
+super(contador, ...);
+this.idAluno = "ID ALUNO-" + contador++;
+}
 
-Cada controller gerencia uma entidade e expõe os seguintes métodos padrão:
+Sistema de Log
+O sistema registra as atividades em console e em arquivo logs/gymtonica_log.txt com três níveis:
+[18/06/2026 21:00:01] [INFO]  Sistema GymTonica iniciado.
+[18/06/2026 21:00:05] [DEBUG] Opção selecionada: 1
+[18/06/2026 21:00:10] [INFO]  Acessando menu de Alunos.
+[18/06/2026 21:00:15] [ERRO]  Aluno não encontrado: ID ALUNO-99.
+[18/06/2026 21:00:20] [AVISO] Opção inválida digitada: 9.
+Níveis de log:
 
-| Controller | Métodos |
-|---|---|
-| `AlunoController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()` |
-| `PlanoController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()` |
-| `TreinoController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()`, `listarPorAluno()` |
-| `MatriculaController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()`, `buscarPorAluno()` |
-| `PersonalController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()` |
-| `PagamentoController` | `cadastrar()`, `alterar()`, `deletar()`, `listarTodos()`, `buscarPorId()`, `listarPorAluno()` |
+INFO — ações normais do sistema
+DEBUG — detalhes internos de navegação
+AVISO — entradas inválidas do usuário
+ERRO — falhas como entidade não encontrada
 
----
 
-## 🖥️ View
+Compartilhamento de Controllers
+Todos os controllers são instanciados uma única vez na Main e injetados nas Views via construtor, garantindo que todas as Views compartilhem a mesma lista de dados:
+javaAlunoController alunoController = new AlunoController();
 
-| View | Métodos |
-|---|---|
-| `MenuPrincipal` | `exibirMenu()`, `cadastrar()`, `alterar()`, `deletar()`, `listar()`, `exibir()`, `redirecionarOpcao()` |
-| `AlunoView` | `exibirMenu()`, `cadastrar()`, `alterar()`, `deletar()`, `listar()` |
-| `PlanoView` | `exibirMenu()`, `cadastrar()`, `alterar()`, `deletar()`, `listar()` |
-| `TreinoView` | `exibirMenu()`, `cadastrar()`, `alterar()`, `deletar()`, `listar()` |
-| `MatriculaView` | `exibirMenu()`, `cadastrar()`, `alterar()`, `deletar()`, `listar()` |
-| `PagamentoView` | `exibirMenu()`, `cadastrarPresencial()`, `cadastrarOnline()`, `alterar()`, `deletar()`, `listar()` |
+AlunoView alunoView = new AlunoView(alunoController);
+MatriculaView matriculaView = new MatriculaView(alunoController, matriculaController);
+PagamentoView pagamentoView = new PagamentoView(alunoController, controllerPagamento);
+TreinoView treinoView = new TreinoView(alunoController, personalController, treinoController);
 
----
+Como Executar
 
-## 🧠 Conceitos de POO Aplicados
+Clone o repositório
+Abra o projeto no IntelliJ IDEA
+Execute a classe Main.java
+Navegue pelo menu principal digitando o número da opção desejada
+Os logs serão salvos automaticamente em logs/gymtonica_log.txt
 
-- **Herança** — `Aluno` e `PersonalTrainer` estendem `Pessoa`; `PagamentoOnline` e `PagamentoPresencial` estendem `Pagamento`
-- **Abstração** — Classes abstratas `Pessoa` e `Pagamento` com métodos abstratos
-- **Polimorfismo** — Implementações distintas de `calcularTotal()` e `getTipoPagamento()` em cada tipo de pagamento
-- **Encapsulamento** — Atributos privados acessados por getters e setters
-- **Interfaces** — `Calculavel` e `Pagavel` definem contratos de comportamento
 
----
+Melhorias Futuras
 
-## ▶️ Como Executar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/gymtonica.git
-   ```
-
-2. Compile o projeto:
-   ```bash
-   javac -d bin src/**/*.java
-   ```
-
-3. Execute:
-   ```bash
-   java -cp bin Main
-   ```
-
-> **Requisitos:** Java 11 ou superior.
-
----
-
-## 👥 Autores
-
-Desenvolvido como trabalho final da disciplina de Java por:
-
-Luiz Eduardo Morawski da Silva
-Maria Clara Paiva Costa dos Santos
-Natan Spegiorin Surek
-Victor Emanuel do Espirito Santo
+Persistência de dados em banco de dados ou arquivo JSON
+Interface gráfica (JavaFX)
+Relatórios de pagamentos por período
+Controle de frequência dos alunos
+Autenticação de usuário administrador

@@ -17,16 +17,30 @@ public class Aluno extends Pessoa {
         this.plano = plano;
     }
 
-    public String getIdAluno() { return idAluno; }
+    public String getIdAluno() {
+        return idAluno;
+    }
 
-    public Plano getPlano() { return plano; }
-    public void setPlano(Plano plano) { this.plano = plano; }
+    public Plano getPlano() {
+        return plano;
+    }
+    public void setPlano(Plano plano) {
+        this.plano = plano;
+    }
 
-    public String getMatricula() { return matricula; }
-    public void setMatricula(String matricula) { this.matricula = matricula; }
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-    public String getObjetivo() { return objetivo; }
-    public void setObjetivo(String objetivo) { this.objetivo = objetivo; }
+    public String getObjetivo() {
+        return objetivo;
+    }
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
 
     @Override
     public String exibirInfo() {

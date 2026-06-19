@@ -12,11 +12,11 @@ public class TreinoController {
         listaTreinos.add(treino);
     }
 
-    public boolean removerTreino(int id) {
-        return listaTreinos.removeIf(t -> t.getId() == id);
+    public boolean removerTreino(String id) {
+        return listaTreinos.removeIf(t -> t.getId().equals(id));
     }
 
-    public boolean alterarTreinoDados(int id, String novaData) {
+    public boolean alterarTreinoDados(String id, String novaData) {
         Treino treinoExistente = buscarPorId(id);
         if (treinoExistente != null) {
             treinoExistente.setData(novaData);
@@ -25,7 +25,7 @@ public class TreinoController {
         return false;
     }
 
-    public boolean mudarObjetivoTreino(int id, int opcaoObjetivo) {
+    public boolean mudarObjetivoTreino(String id, int opcaoObjetivo) {
         Treino t = buscarPorId(id);
         if (t == null) return false;
 
@@ -74,9 +74,9 @@ public class TreinoController {
         return listaTreinos;
     }
 
-    public Treino buscarPorId(int id) {
+    public Treino buscarPorId(String id) {
         for (Treino t : listaTreinos) {
-            if (t.getId() == id) {
+            if (t.getId().equals(id)) {
                 return t;
             }
         }

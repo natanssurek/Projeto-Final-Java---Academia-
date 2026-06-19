@@ -17,49 +17,29 @@ public class AlunoView {
     }
 
     public void exibirMenuAluno() {
-
         int opcao;
-
         do {
             System.out.println("\n=== MENU ALUNO ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar por ID");
-            System.out.println("4 - Alterar");
-            System.out.println("5 - Deletar");
+            System.out.println("4 - Buscar por CPF");
+            System.out.println("5 - Alterar");
+            System.out.println("6 - Deletar");
             System.out.println("0 - Voltar");
 
             opcao = InputHelper.pegarNumInteiro("Escolha uma opção: ");
 
             switch (opcao) {
-
-                case 1:
-                    cadastrarAluno();
-                    break;
-
-                case 2:
-                    listarAluno();
-                    break;
-
-                case 3:
-                    buscarPorIdAluno();
-                    break;
-
-                case 4:
-                    alterarAluno();
-                    break;
-
-                case 5:
-                    deletarAluno();
-                    break;
-
-                case 0:
-                    break;
-
-                default:
-                    System.out.println("Opção inválida.");
+                case 1: cadastrarAluno(); break;
+                case 2: listarAluno(); break;
+                case 3: buscarPorIdAluno(); break;
+                case 4: buscarPorCPFAluno(); break;
+                case 5: alterarAluno(); break;
+                case 6: deletarAluno(); break;
+                case 0: break;
+                default: System.out.println("Opção inválida.");
             }
-
         } while (opcao != 0);
     }
 
@@ -90,61 +70,108 @@ public class AlunoView {
     }
 
     public void buscarPorIdAluno() {
-        int id = InputHelper.pegarNumInteiro("Digite o ID numérico do aluno: ");
-
+        String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
         Aluno aluno = alunoController.buscarPorIdAluno(id);
 
         if (aluno != null) {
             System.out.println(aluno.exibirInfo());
+        } else {
+            System.out.println("Aluno não encontrado.");
         }
-        else {
+    }
+
+    public void buscarPorCPFAluno() {
+        String cpf = InputHelper.pegarTexto("Digite o CPF: ");
+        Aluno aluno = alunoController.buscarPorCPFAluno(cpf);
+
+        if (aluno != null) {
+            System.out.println(aluno.exibirInfo());
+        } else {
             System.out.println("Aluno não encontrado.");
         }
     }
 
     public void alterarAluno() {
-        int id = InputHelper.pegarNumInteiro("ID numérico do aluno que deseja alterar: ");
+        System.out.println("COMO DESEJA LOCALIZAR O ALUNO?");
+        System.out.println("1 - ID");
+        System.out.println("2 - CPF");
 
-        Aluno alunoExistente = alunoController.buscarPorIdAluno(id);
-        if (alunoExistente == null) {
+        int opcao = InputHelper.pegarNumInteiro("Escolha: ");
+        Aluno alunoEncontrado = null;
+
+        switch (opcao) {
+            case 1:
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
+                alunoEncontrado = alunoController.buscarPorIdAluno(id);
+                break;
+            case 2:
+                String cpf = InputHelper.pegarTexto("Digite o CPF: ");
+                alunoEncontrado = alunoController.buscarPorCPFAluno(cpf);
+                break;
+            default:
+                System.out.println("Opção inválida.");
+                return;
+        }
+
+        if (alunoEncontrado == null) {
             System.out.println("Aluno não encontrado.");
             return;
         }
 
-        String nome = InputHelper.pegarTexto("Novo nome: ");
-        String cpf = InputHelper.pegarTexto("Novo CPF: ");
-        String email = InputHelper.pegarTexto("Novo email: ");
-        String telefone = InputHelper.pegarTexto("Novo telefone: ");
-        String matricula = InputHelper.pegarTexto("Nova matrícula: ");
-        String objetivo = InputHelper.pegarTexto("Novo objetivo: ");
+        String novoNome = InputHelper.pegarTexto("Novo nome: ");
+        String novoEmail = InputHelper.pegarTexto("Novo email: ");
+        String novoTelefone = InputHelper.pegarTexto("Novo telefone: ");
+        String novaMatricula = InputHelper.pegarTexto("Nova matrícula: ");
+        String novoObjetivo = InputHelper.pegarTexto("Novo objetivo: ");
 
         planoController.exibirPlanos();
-        int opcao = InputHelper.pegarNumInteiro("Escolha o novo Plano (1-3): ");
-        Plano plano = planoController.selecionarPlano(opcao);
+        int opcaoPlano = InputHelper.pegarNumInteiro("Escolha o novo Plano (1-3): ");
+        Plano novoPlano = planoController.selecionarPlano(opcaoPlano);
 
-        if (plano == null) return;
+        if (novoPlano == null) return;
 
-        Aluno alunoAtualizado = new Aluno(nome, cpf, email, telefone, matricula, objetivo, plano);
+        Aluno alunoAtualizado = new Aluno(novoNome, alunoEncontrado.getCpf(), novoEmail, novoTelefone, novaMatricula, novoObjetivo, novoPlano);
 
-        boolean alterou = alunoController.alterarAluno(alunoAtualizado);
-
-        if (alterou) {
-            System.out.println("Aluno alterado com sucesso.");
-        } else {
-            System.out.println("Erro ao atualizar o aluno.");
+        switch (opcao) {
+            case 1:
+                alunoController.alterarAlunoPorId(alunoEncontrado.getIdAluno(), alunoAtualizado);
+                break;
+            case 2:
+                alunoController.alterarAlunoPorCpf(alunoEncontrado.getCpf(), alunoAtualizado);
+                break;
         }
+
+        System.out.println("Aluno alterado com sucesso.");
     }
 
     public void deletarAluno() {
-        int id = InputHelper.pegarNumInteiro("ID do aluno: ");
+        System.out.println("COMO DESEJA LOCALIZAR O ALUNO?");
+        System.out.println("1 - ID");
+        System.out.println("2 - CPF");
 
-        boolean deletou = alunoController.deletarAluno(id);
+        int opcao = InputHelper.pegarNumInteiro("Escolha: ");
+        Aluno alunoEncontrado = null;
 
-        if (deletou) {
-            System.out.println("Aluno removido com sucesso.");
+        switch (opcao) {
+            case 1:
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
+                alunoEncontrado = alunoController.buscarPorIdAluno(id);
+                break;
+            case 2:
+                String cpf = InputHelper.pegarTexto("Digite o CPF: ");
+                alunoEncontrado = alunoController.buscarPorCPFAluno(cpf);
+                break;
+            default:
+                System.out.println("Opção inválida.");
+                return;
         }
-        else {
+
+        if (alunoEncontrado == null) {
             System.out.println("Aluno não encontrado.");
+            return;
         }
+
+        alunoController.deletarAluno(alunoEncontrado.getIdAluno());
+        System.out.println("Aluno removido com sucesso.");
     }
 }
