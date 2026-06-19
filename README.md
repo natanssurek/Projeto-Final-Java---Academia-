@@ -1,17 +1,111 @@
-GymTonica — Sistema de Gerenciamento de Academia
-Descrição
-O GymTonica é um sistema de gerenciamento de academia desenvolvido em Java, seguindo o padrão arquitetural MVC (Model-View-Controller). O sistema permite gerenciar alunos, personal trainers, matrículas, pagamentos e treinos de forma integrada, com geração automática de IDs e registro de logs em arquivo .txt.
+# 🏋️ GymTonica
 
-Tecnologias Utilizadas
+Sistema de gerenciamento de academias desenvolvido em **Java**, utilizando o padrão arquitetural **MVC (Model-View-Controller)** para organizar a estrutura do projeto e facilitar sua manutenção.
 
-Java 17+
-Paradigma de Orientação a Objetos
-Padrão MVC
-java.util.logging para logs
-Arquivo .txt para persistência de logs
+O sistema permite o gerenciamento de alunos, personal trainers, matrículas, pagamentos e treinos, além de registrar atividades por meio de um sistema de logs.
 
+---
 
-Estrutura do Projeto
+## 📖 Sobre o Projeto
+
+O GymTonica foi desenvolvido com o objetivo de aplicar conceitos de:
+
+* Programação Orientada a Objetos (POO)
+* Arquitetura MVC
+* Encapsulamento, Herança e Polimorfismo
+* Injeção de Dependência
+* Manipulação de Arquivos
+* Boas Práticas de Desenvolvimento em Java
+
+---
+
+## 🚀 Funcionalidades
+
+### 👨‍🎓 Alunos
+
+* Cadastrar alunos
+* Listar alunos
+* Buscar por ID
+* Buscar por CPF
+* Alterar cadastro
+* Excluir aluno
+* Geração automática de IDs
+
+### 💪 Personal Trainers
+
+* Cadastrar personal trainers
+* Listar personal trainers
+* Buscar por ID
+* Buscar por CPF
+* Buscar por CREF
+* Alterar cadastro
+* Excluir personal trainer
+* Geração automática de IDs
+
+### 📋 Planos
+
+| Plano     | Duração  | Valor     |
+| --------- | -------- | --------- |
+| Mensal    | 1 mês    | R$ 100,00 |
+| Semestral | 6 meses  | R$ 500,00 |
+| Anual     | 12 meses | R$ 900,00 |
+
+* Cálculo automático de mensalidades
+* Aplicação de descontos por período
+* Implementação da interface `Calculavel`
+
+### 📝 Matrículas
+
+* Cadastrar matrícula
+* Alterar matrícula
+* Remover matrícula
+* Listar matrículas
+* Vincular aluno a um plano
+
+### 💳 Pagamentos
+
+* Pagamento Presencial
+* Pagamento Online
+* Alteração de status (Pendente/Pago)
+* Busca por ID
+* Busca por nome do aluno
+* Exclusão de pagamento
+
+### 🏃 Treinos
+
+* Cadastro de treinos
+* Associação entre aluno e personal trainer
+* Geração automática de rotina
+
+Objetivos disponíveis:
+
+* Hipertrofia
+* Emagrecimento
+* Definição
+* Resistência
+* Funcional
+* Força Bruta
+* Mobilidade
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+* Java 17+
+* Programação Orientada a Objetos (POO)
+* Arquitetura MVC
+* Collections Framework
+* Java Logging API
+* Manipulação de Arquivos TXT
+* IntelliJ IDEA
+* Git
+* GitHub
+
+---
+
+## 📂 Estrutura do Projeto
+
+```text
 src/
 ├── Controller/
 │   ├── AlunoController.java
@@ -21,12 +115,12 @@ src/
 │   └── TreinoController.java
 │
 ├── Model/
-│   ├── Pessoa.java (abstract)
+│   ├── Pessoa.java
 │   ├── Aluno.java
 │   ├── PersonalTrainer.java
 │   ├── Plano.java
 │   ├── Matricula.java
-│   ├── Pagamento.java (abstract)
+│   ├── Pagamento.java
 │   ├── PagamentoOnline.java
 │   ├── PagamentoPresencial.java
 │   └── Treino.java
@@ -44,98 +138,134 @@ src/
 │   └── Logger.java
 │
 └── Main.java
+```
 
-Funcionalidades
-Alunos
+---
 
-Cadastrar, listar, buscar por ID ou CPF, alterar e deletar alunos
-Geração automática de ID no formato ID ALUNO-1, ID ALUNO-2...
-Vinculação de plano no cadastro (Mensal, Semestral ou Anual)
+## 🔄 Geração Automática de IDs
 
-Personal Trainers
+Todas as entidades possuem geração automática de identificadores únicos através de contadores estáticos.
 
-Cadastrar, listar, buscar por ID, CPF ou CREF, alterar e deletar
-Geração automática de ID no formato ID PERSONAL-1, ID PERSONAL-2...
+Exemplo:
 
-Planos
-
-Três planos fixos disponíveis:
-
-Mensal — R$ 100,00 / 1 mês
-Semestral — R$ 500,00 / 6 meses
-Anual — R$ 900,00 / 12 meses
-
-
-Cálculo automático de mensalidade e desconto via interface Calculavel
-
-Matrículas
-
-Matricular aluno em um plano
-Alterar, remover e listar matrículas
-Geração automática de ID no formato MATRICULA-1, MATRICULA-2...
-
-Pagamentos
-
-Dois tipos: Presencial e Online
-Cadastrar, alterar status (pendente/pago), deletar e listar
-Busca por ID do pagamento ou nome do aluno
-Geração automática de ID no formato ID PAGAMENTO-1, ID PAGAMENTO-2...
-
-Treinos
-
-Cadastrar treino vinculando aluno e personal trainer
-7 tipos de objetivo disponíveis: Hipertrofia, Emagrecimento, Definição, Resistência, Funcional, Força Bruta e Mobilidade
-Cada objetivo define automaticamente duração e rotina
-Geração automática de ID no formato TREINO-1, TREINO-2...
-
-
-Geração Automática de IDs
-Todas as entidades geram seus próprios IDs automaticamente via contador estático, sem necessidade de input do usuário:
-javaprivate static int contador = 1;
+```java
+private static int contador = 1;
 private String idAluno;
 
 public Aluno(...) {
-super(contador, ...);
-this.idAluno = "ID ALUNO-" + contador++;
+    super(contador, ...);
+    this.idAluno = "ID ALUNO-" + contador++;
 }
+```
 
-Sistema de Log
-O sistema registra as atividades em console e em arquivo logs/gymtonica_log.txt com três níveis:
+Exemplos de IDs gerados:
+
+```text
+ID ALUNO-1
+ID PERSONAL-1
+MATRICULA-1
+ID PAGAMENTO-1
+TREINO-1
+```
+
+---
+
+## 📊 Sistema de Logs
+
+Os eventos do sistema são registrados em:
+
+```text
+logs/gymtonica_log.txt
+```
+
+Exemplo:
+
+```text
 [18/06/2026 21:00:01] [INFO]  Sistema GymTonica iniciado.
 [18/06/2026 21:00:05] [DEBUG] Opção selecionada: 1
 [18/06/2026 21:00:10] [INFO]  Acessando menu de Alunos.
-[18/06/2026 21:00:15] [ERRO]  Aluno não encontrado: ID ALUNO-99.
-[18/06/2026 21:00:20] [AVISO] Opção inválida digitada: 9.
-Níveis de log:
+[18/06/2026 21:00:15] [ERRO]  Aluno não encontrado.
+[18/06/2026 21:00:20] [AVISO] Opção inválida digitada.
+```
 
-INFO — ações normais do sistema
-DEBUG — detalhes internos de navegação
-AVISO — entradas inválidas do usuário
-ERRO — falhas como entidade não encontrada
+### Níveis de Log
 
+| Nível | Descrição                                 |
+| ----- | ----------------------------------------- |
+| INFO  | Operações normais do sistema              |
+| DEBUG | Informações internas para desenvolvimento |
+| AVISO | Entradas inválidas do usuário             |
+| ERRO  | Falhas ou exceções do sistema             |
 
-Compartilhamento de Controllers
-Todos os controllers são instanciados uma única vez na Main e injetados nas Views via construtor, garantindo que todas as Views compartilhem a mesma lista de dados:
-javaAlunoController alunoController = new AlunoController();
+---
+
+## 🔗 Compartilhamento de Controllers
+
+Todos os controllers são instanciados apenas uma vez na classe principal e compartilhados entre as Views através de injeção de dependência.
+
+```java
+AlunoController alunoController = new AlunoController();
 
 AlunoView alunoView = new AlunoView(alunoController);
 MatriculaView matriculaView = new MatriculaView(alunoController, matriculaController);
 PagamentoView pagamentoView = new PagamentoView(alunoController, controllerPagamento);
 TreinoView treinoView = new TreinoView(alunoController, personalController, treinoController);
+```
 
-Como Executar
+---
 
-Clone o repositório
-Abra o projeto no IntelliJ IDEA
-Execute a classe Main.java
-Navegue pelo menu principal digitando o número da opção desejada
-Os logs serão salvos automaticamente em logs/gymtonica_log.txt
+## ▶️ Como Executar
 
+### 1. Clonar o repositório
 
-Melhorias Futuras
+```bash
+git clone https://github.com/seu-usuario/gymtonica.git
+```
 
-Persistência de dados em banco de dados ou arquivo JSON
-Interface gráfica (JavaFX)
-Relatórios de pagamentos por período
-Controle de frequência dos alunos
-Autenticação de usuário administrador
+### 2. Abrir no IntelliJ IDEA
+
+Importe o projeto normalmente como um projeto Java.
+
+### 3. Executar a aplicação
+
+Execute a classe:
+
+```text
+Main.java
+```
+
+### 4. Utilizar o sistema
+
+Navegue pelo menu principal utilizando as opções exibidas no terminal.
+
+---
+
+## 🚀 Melhorias Futuras
+
+* Persistência em banco de dados
+* Persistência em JSON
+* Interface gráfica com JavaFX
+* Controle de frequência dos alunos
+* Relatórios financeiros
+* Dashboard administrativo
+* Sistema de autenticação
+* Exportação de relatórios em PDF
+
+---
+
+## 👨‍💻 Equipe de Desenvolvimento
+
+* Luiz Eduardo Morawski da Silva
+* Maria Clara Paiva
+* Natan Spegiorin Surek
+* Victor Emanuel
+
+---
+
+## 📄 Licença
+
+Projeto desenvolvido para fins acadêmicos na disciplina de Engenharia de Software.
+
+---
+
+⭐ Se este projeto foi útil para você, considere deixar uma estrela no repositório.
