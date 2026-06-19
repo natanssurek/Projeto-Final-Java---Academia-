@@ -1,6 +1,10 @@
 # 🏋️ GymTonica
 
+<<<<<<< HEAD
 Sistema de gerenciamento de academias desenvolvido em **Java**, utilizando o padrão arquitetural **MVC (Model-View-Controller)** para organizar a estrutura do projeto e facilitar sua manutenção.
+=======
+Tecnologias Utilizadas 
+>>>>>>> 3aef306109305ea8cbae1c981f5e8526d383489b
 
 O sistema permite o gerenciamento de alunos, personal trainers, matrículas, pagamentos e treinos, além de registrar atividades por meio de um sistema de logs.
 
@@ -222,6 +226,7 @@ TreinoView treinoView = new TreinoView(alunoController, personalController, trei
 git clone https://github.com/seu-usuario/gymtonica.git
 ```
 
+<<<<<<< HEAD
 ### 2. Abrir no IntelliJ IDEA
 
 Importe o projeto normalmente como um projeto Java.
@@ -269,3 +274,10 @@ Projeto desenvolvido para fins acadêmicos na disciplina de Engenharia de Softwa
 ---
 
 ⭐ Se este projeto foi útil para você, considere deixar uma estrela no repositório.
+=======
+Persistência de dados em banco de dados ou arquivo JSON
+Interface gráfica (JavaFX)
+Relatórios de pagamentos por período
+Controle de frequência dos alunos
+Autenticação de usuário administrador
+>>>>>>> 3aef306109305ea8cbae1c981f5e8526d383489b
