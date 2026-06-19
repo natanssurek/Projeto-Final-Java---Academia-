@@ -29,14 +29,22 @@ public class ControllerPagamento {
         for (PagamentoOnline p : listaPagamentoOnline) {
             if (p.getId().equals(id)) {
                 p.setData(data);
-                p.setStatus(status);
+                if (status) {
+                    p.pagar(p.getValor());
+                } else {
+                    p.setStatus(false);
+                }
                 return true;
             }
         }
         for (PagamentoPresencial p : listaPagamentoPresencial) {
             if (p.getId().equals(id)) {
                 p.setData(data);
-                p.setStatus(status);
+                if (status) {
+                    p.pagar(p.getValor());
+                } else {
+                    p.setStatus(false);
+                }
                 return true;
             }
         }

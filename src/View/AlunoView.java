@@ -26,7 +26,7 @@ public class AlunoView {
             System.out.println("4 - Buscar por CPF");
             System.out.println("5 - Alterar");
             System.out.println("6 - Deletar");
-            System.out.println("0 - Voltar");
+            System.out.println("7 - Voltar");
 
             opcao = InputHelper.pegarNumInteiro("Escolha uma opção: ");
 
@@ -37,10 +37,10 @@ public class AlunoView {
                 case 4: buscarPorCPFAluno(); break;
                 case 5: alterarAluno(); break;
                 case 6: deletarAluno(); break;
-                case 0: break;
+                case 7: break;
                 default: System.out.println("Opção inválida.");
             }
-        } while (opcao != 0);
+        } while (opcao != 7);
     }
 
     public void cadastrarAluno() {

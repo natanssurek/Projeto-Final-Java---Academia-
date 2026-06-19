@@ -34,13 +34,6 @@ public class PagamentoPresencial extends Pagamento implements Pagavel{
     }
 
     @Override
-    public void pagar(double valor, String descricao) {
-        this.setValor(valor);
-        this.setStatus(true);
-        System.out.println("Pago: " + this.getStatus());
-    }
-
-    @Override
     public double calcularValor() {
         return getValor();
     }
