@@ -17,7 +17,7 @@ public class MatriculaView {
     public MatriculaView(AlunoController alunoController, MatriculaController matriculaController) {
         this.alunoController = alunoController;
         this.matriculaController = matriculaController;
-        this.planoController = new PlanoController(); // <- não precisa injetar, não tem lista
+        this.planoController = new PlanoController();
     }
 
     public void exibirMenu() {
@@ -46,7 +46,7 @@ public class MatriculaView {
     private void cadastrar() {
         System.out.println("\n--- NOVA MATRÍCULA ---");
 
-        String idAluno = InputHelper.pegarTexto("ID do Aluno (ex: ALUNO-1): ");
+        String idAluno = InputHelper.pegarTexto("ID do Aluno (ex: ALUNO-00001): ");
         Aluno alunoObj = alunoController.buscarPorIdAluno(idAluno);
 
         if (alunoObj == null) {

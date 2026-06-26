@@ -62,7 +62,7 @@ public class PersonalView {
     }
 
     public void buscarPorId() {
-        String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-1): ");
+        String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-00001): ");
         PersonalTrainer personal = gerenciarPersonal.buscarPorIdPersonal(id);
 
         if (personal != null) {
@@ -104,7 +104,7 @@ public class PersonalView {
 
         switch (opcao) {
             case 1:
-                String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-1): ");
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-00001): ");
                 personalEncontrado = gerenciarPersonal.buscarPorIdPersonal(id);
                 break;
             case 2:
@@ -151,7 +151,7 @@ public class PersonalView {
 
         switch (opcao) {
             case 1:
-                String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-1): ");
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID PERSONAL-00001): ");
                 personalEncontrado = gerenciarPersonal.buscarPorIdPersonal(id);
                 break;
             case 2:

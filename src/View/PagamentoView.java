@@ -56,7 +56,9 @@ public class PagamentoView {
         String idAluno = InputHelper.pegarTexto("Digite o ID do aluno (ex: ID ALUNO-1): ");
         Aluno aluno = alunoController.buscarPorIdAluno(idAluno);
 
-        if (aluno == null) { System.out.println("Aluno não encontrado!"); return; }
+        if (aluno == null) { System.out.println("Aluno não encontrado!");
+            return;
+        }
 
         String data = InputHelper.pegarTexto("Digite a data:");
         String plataforma = InputHelper.pegarTexto("Digite a plataforma:");
@@ -84,7 +86,10 @@ public class PagamentoView {
     public void alterar() {
         String id = InputHelper.pegarTexto("Digite o ID do pagamento (ex: ID PAGAMENTO-): :");
         Pagamento p = controllerPagamento.buscarPorId(id);
-        if (p == null) { System.out.println("Pagamento inexistente!"); return; }
+        if (p == null) {
+            System.out.println("Pagamento inexistente!");
+            return;
+        }
         System.out.println(p.exibirInfo());
 
         String data = InputHelper.pegarTexto("Digite a nova data:");

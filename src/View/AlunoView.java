@@ -48,7 +48,6 @@ public class AlunoView {
         String cpf = InputHelper.pegarTexto("CPF: ");
         String email = InputHelper.pegarTexto("Email: ");
         String telefone = InputHelper.pegarTexto("Telefone: ");
-        String matricula = InputHelper.pegarTexto("Matrícula: ");
         String objetivo = InputHelper.pegarTexto("Objetivo: ");
 
         planoController.exibirPlanos();
@@ -57,7 +56,7 @@ public class AlunoView {
 
         if (plano == null) return;
 
-        Aluno aluno = new Aluno(nome, cpf, email, telefone, matricula, objetivo, plano);
+        Aluno aluno = new Aluno(nome, cpf, email, telefone, objetivo, plano);
         alunoController.cadastrarAluno(aluno);
 
         System.out.println("Aluno cadastrado com sucesso.");
@@ -70,7 +69,7 @@ public class AlunoView {
     }
 
     public void buscarPorIdAluno() {
-        String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
+        String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-00001): ");
         Aluno aluno = alunoController.buscarPorIdAluno(id);
 
         if (aluno != null) {
@@ -101,7 +100,7 @@ public class AlunoView {
 
         switch (opcao) {
             case 1:
-                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-00001): ");
                 alunoEncontrado = alunoController.buscarPorIdAluno(id);
                 break;
             case 2:
@@ -121,7 +120,6 @@ public class AlunoView {
         String novoNome = InputHelper.pegarTexto("Novo nome: ");
         String novoEmail = InputHelper.pegarTexto("Novo email: ");
         String novoTelefone = InputHelper.pegarTexto("Novo telefone: ");
-        String novaMatricula = InputHelper.pegarTexto("Nova matrícula: ");
         String novoObjetivo = InputHelper.pegarTexto("Novo objetivo: ");
 
         planoController.exibirPlanos();
@@ -130,7 +128,7 @@ public class AlunoView {
 
         if (novoPlano == null) return;
 
-        Aluno alunoAtualizado = new Aluno(novoNome, alunoEncontrado.getCpf(), novoEmail, novoTelefone, novaMatricula, novoObjetivo, novoPlano);
+        Aluno alunoAtualizado = new Aluno(novoNome, alunoEncontrado.getCpf(), novoEmail, novoTelefone, novoObjetivo, novoPlano);
 
         switch (opcao) {
             case 1:
@@ -154,7 +152,7 @@ public class AlunoView {
 
         switch (opcao) {
             case 1:
-                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-1): ");
+                String id = InputHelper.pegarTexto("Digite o ID (ex: ID ALUNO-00001): ");
                 alunoEncontrado = alunoController.buscarPorIdAluno(id);
                 break;
             case 2:

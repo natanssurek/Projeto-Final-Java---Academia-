@@ -14,7 +14,7 @@ public class Logger {
     private static void salvar(String nivel, String mensagem) {
         String linha = "[" + LocalDateTime.now().format(formato) + "] [" + nivel + "] " + mensagem;
 
-        System.out.println(linha); // <- exibe no console também
+        System.out.println(linha);
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO_LOG, true))) {
             writer.println(linha);

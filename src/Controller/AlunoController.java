@@ -40,7 +40,6 @@ public class AlunoController {
             alunoEncontrado.setNome(alunoAtualizado.getNome());
             alunoEncontrado.setEmail(alunoAtualizado.getEmail());
             alunoEncontrado.setTelefone(alunoAtualizado.getTelefone());
-            alunoEncontrado.setMatricula(alunoAtualizado.getMatricula());
             alunoEncontrado.setObjetivo(alunoAtualizado.getObjetivo());
             alunoEncontrado.setPlano(alunoAtualizado.getPlano());
         }
@@ -53,7 +52,6 @@ public class AlunoController {
             alunoEncontrado.setNome(alunoAtualizado.getNome());
             alunoEncontrado.setEmail(alunoAtualizado.getEmail());
             alunoEncontrado.setTelefone(alunoAtualizado.getTelefone());
-            alunoEncontrado.setMatricula(alunoAtualizado.getMatricula());
             alunoEncontrado.setObjetivo(alunoAtualizado.getObjetivo());
             alunoEncontrado.setPlano(alunoAtualizado.getPlano());
         }

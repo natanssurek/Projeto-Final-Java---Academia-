@@ -10,7 +10,7 @@ public class PersonalTrainer extends Pessoa {
 
     public PersonalTrainer(String nome, String cpf, String email, String telefone, String cref, String especialidade) {
         super(contador, nome, cpf, email, telefone);
-        this.idPersonal = "ID PERSONAL-" + contador++;
+        this.idPersonal = "ID PERSONAL-" + String.format("%05d", contador++) ;
         this.cref = cref;
         this.especialidade = especialidade;
     }
